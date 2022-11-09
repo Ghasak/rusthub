@@ -132,10 +132,10 @@ pub fn common_collections_fn() {
 }
 
 // This function will take String object and give us &str literal, It is implmentation of Rust 1.
-fn string_to_static_str(s: String) -> &'static str {
+pub fn string_to_static_str(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
 // this function will tell us the type of object in Rust
-fn type_of<T>(_:T) -> & 'static str {
+pub fn type_of<T>(_:T) -> & 'static str {
         std::any::type_name::<T>()
     }

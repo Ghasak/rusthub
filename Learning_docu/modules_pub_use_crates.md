@@ -142,6 +142,14 @@ There are three kewrods associated with the `use` keyword these are:
 
 
 ```rust
+// use std::io ;
+// use std::io::stdin;
+// these above two calles can be summarized into
+use std::io::{self, stdin};
+
+```
+
+```rust
 mod house {
 
     pub const HOUSE_NUMBER: u32 = 56;
