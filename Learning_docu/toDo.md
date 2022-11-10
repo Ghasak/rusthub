@@ -3,7 +3,6 @@
 - easy to be debugged
 - Full control
 - Safety in memory writing for high speed demand applications.
--
 
 
 ## Things to build in Rust
@@ -18,13 +17,12 @@
 
 # How to learn Rust
 
-- [ ] String types and their usages
+- [x] String types and their usages
 - [ ] Smart pointers (box, ref ..etc. ).
 - [ ] Traits in OOP.
 - [ ] Lifetime.
-- [ ] Ownership and borrowing.
-- [ ] Stack and Heap.
-- [ ] Syntax Suger.
+- [x] Ownership and borrowing.
+- [x] Stack and Heap.
 
 
 

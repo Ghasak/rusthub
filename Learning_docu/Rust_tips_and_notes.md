@@ -48,8 +48,10 @@ fn main() {
 
 
 ## Array and Vector in Rust
-- `array` is what we call it a list, but must be all elements in same type. `array` is constructed on `stack` and must known the size.
-- `Vector` is another list, but on `heap` the size can be different, all elements must be same data type.
+- `array` is what we call it a list, but must be all elements in same type.
+  `array` is constructed on `stack` and must known the size.
+- `Vector` is another list, but on `heap` the size can be different, all
+  elements must be same data type.
 
 ```Rust
 // Assumption
