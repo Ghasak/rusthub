@@ -1,5 +1,5 @@
 
-
+#![allow(dead_code)]
 pub fn experiment_sum_fn(){
 
     let mut s: String = String::new();

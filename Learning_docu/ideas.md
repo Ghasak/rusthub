@@ -74,4 +74,7 @@ the `programming elements` declarations in them not the definitions.
 
 
 
+## REFERENCES
+- [A Guide to Porting C/C++ to Rust](https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/)
+
 

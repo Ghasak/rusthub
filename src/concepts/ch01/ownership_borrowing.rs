@@ -1,4 +1,5 @@
 
+#![allow(dead_code)]
 
 pub fn about_owner_ship_concepts(){
 

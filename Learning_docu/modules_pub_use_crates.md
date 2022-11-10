@@ -532,8 +532,52 @@ pub fn function(){
     - Same level of `dir` put `<same_dir_name>.rs` (Rust 2018)
 
 
+## Tools for investigating the project skelton in Rust
+You will need a `Crate` called `cargo-modules` which will allow us to visulize the our developed crate modules tree.
+```rust
+cargo install cargo-modules
+```
+Associated commands with it:
+```rust
+cargo modules generate tree
+```
+- Checking our module tree using:
+```rust
+╰─ cargo modules generate tree
+
+crate rust_learning_hub
+└── mod concepts: pub(crate)
+    └── mod ch01: pub
+        ├── mod common_collections: pub
+        ├── mod experimental_ideas: pub
+        └── mod ownership_borrowing: pub
+```
+To see other features you can use `cargo modules generate tree  --help`
+- Now, lets even the `enum` `struct` ..etc using
+```rust
+├─ﮧ INSERT  1h28m|main !8 ?1
+╰─ cargo modules generate tree --with-types
+
+crate rust_learning_hub
+├── mod concepts: pub(crate)
+│   ├── mod ch01: pub
+│   │   ├── mod common_collections: pub
+│   │   │   ├── fn common_collections_fn: pub
+│   │   │   ├── fn string_to_static_str: pub
+│   │   │   └── fn type_of: pub
+│   │   ├── mod experimental_ideas: pub
+│   │   │   └── fn experiment_sum_fn: pub
+│   │   └── mod ownership_borrowing: pub
+│   │       ├── fn about_owner_ship_concepts: pub
+│   │       ├── fn func1: pub
+│   │       └── fn square: pub
+│   └── fn create_text: pub
+└── fn main: pub(crate)
+```
+
 
 ## REFERNCES
 - [07 Modules, Pub and Use | Rust Tutorials](https://www.youtube.com/watch?v=6cfcWzsvLrA)
 - [Rust Book](https://www.youtube.com/watch?v=6cfcWzsvLrA)
 - [How can I include a module from another file from the same project?](https://stackoverflow.com/questions/26388861/how-can-i-include-a-module-from-another-file-from-the-same-project)
+- [Rust Modules - Explained Like I'm 5 ](https://www.youtube.com/watch?v=969j0qnJGi8)

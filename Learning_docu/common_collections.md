@@ -1,14 +1,13 @@
 # Common Collections
 
 Basically we have:
+
 1. a `vector` allows you to store a varaible number of values next to each
    other.
-2. a  `String`  is a collection of characters. We've mentioned the `String`
+2. a `String` is a collection of characters. We've mentioned the `String`
    type previously, but this chapter will talke about it in depth.
 3. a `has-map` allow you to associate a value with a particule key. It's a
    particular implmentation of the more general data structure called a map.
-
-
 
 ## Writing to vect
 
@@ -157,7 +156,59 @@ fn type_of<T>(_:T) -> & 'static str {
 
 ```
 
+## String - data collection
 
+### Concatenation with the `+` Operator or the format! Macor
+
+- Using `+` to concat two strings, in the form
+
+```rust
+
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    println!("We have {} and {}", s1, s2);
+    let s3 =  s1 + &s2;
+    print!("now both have been concatented into -> [{}]", s3);
+
+
+```
+
+- you can use `format!`
+
+```rust
+format!("{}{}", s1, s2);
+```
+
+- Accessing `String` by index is not allow in `Rust`, for three reasons
+- Since the string is a `utf-8` number of bytes per characters is not always matching.
+- Bytes and scalar values and grapheme clusters!
+- accessing should support O(1) but that not the case.
+
+- Slicing strings: indexing into a string is often a bad idea beaxus its not clear what the return
+  type of the string-indexign operation should be:
+  - rather than indxin gusing `[]` with single number, you can use `[]` with
+    a range to create a string slice containging particular bytes:
+    ```rust
+    let hello = "Здравствуйте";
+    let s = &hello[0..4];
+    ```
+  - be careful sometimes if you try to access some inidivudal character of
+    utf-8 `String` you will get a compliation error. For the reasons that we
+    stated above.
+  - Best way is to iterate over each character in your `String`.
+  ```rust
+      for c in "Здравствуйте".chars(){
+              println!("{}", c);
+          }
+  ```
+  - Alternatively, the byte method returns `each raw byte` whic mgith be
+    appropriate for your domain. But, be sure to remember that valid Unicode
+    scalar values may be made up of more than 1 byte.
+    ```rust
+    for b in "Здравствуйте;".bytes(){
+    println!("{}", b);
+    }
+    ```
 
 
 

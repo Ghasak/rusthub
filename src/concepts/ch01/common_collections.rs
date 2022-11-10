@@ -109,24 +109,60 @@ pub fn common_collections_fn() {
     println!(" Storing UTF-8 Encoded Text with Strings",);
     println!("==============================================",);
 
-
     let s1 = "this is a string literal ".to_string();
     let s2 = &s1[..];
 
-    let mut v : Vec<&str> = Vec::new();
-    for i in 0..10{
+    let mut v: Vec<&str> = Vec::new();
+    for i in 0..10 {
         let x = format!("we have value -> {i}");
         let s: &'static str = super::common_collections::string_to_static_str(x);
         //let y:&str = &x[..]; <- this doesnt work
         v.push(s);
-
     }
 
-    for item in &v{
+    for item in &v {
         // you are passing here item which is a reference, (memory address), you need to dererence it at first.
-        println!("We have now -> {}, with type -> {}", item, super::common_collections::type_of(*item));
+        println!(
+            "We have now -> {}, with type -> {}",
+            item,
+            super::common_collections::type_of(*item)
+        );
     }
 
+    println!("==============================================",);
+    println!(" Concatenation with the `+` Operator or the format! Macor",);
+    println!("==============================================",);
+    // Concatenation with the `+` Operator or the format! Macor
+
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    println!("We have {} and {}", &s1, &s2);
+    let s3 = s1.to_string() + &s2;
+    print!("now both have been concatented into -> [{}]", s3);
+
+    let new_string = format!("->>{}{}<<-", s1, s2);
+    println!("\n");
+    println!("{}", new_string);
+
+    println!("==============================================",);
+    println!("Slicing String!!!!",);
+    println!("==============================================",);
+
+    let hello = "Здравствуйте";
+    let s = &hello[0..4];
+    println!("what we want to pritn is : {}", s);
+
+    println!("==============================================",);
+    println!("Method for iterating over strings .. ",);
+    println!("==============================================",);
+    for c in "Здравствуйте".chars() {
+        println!("{}", c);
+    }
+
+    // Alternatively, the byte method returns `each raw byte` whic mgith be appropriate for your domain.
+    for b in "Здравствуйте;".bytes(){
+        println!("{}", b);
+    }
 
 
 }
@@ -136,6 +172,6 @@ pub fn string_to_static_str(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
 // this function will tell us the type of object in Rust
-pub fn type_of<T>(_:T) -> & 'static str {
-        std::any::type_name::<T>()
-    }
+pub fn type_of<T>(_: T) -> &'static str {
+    std::any::type_name::<T>()
+}
