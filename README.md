@@ -43,7 +43,9 @@ crate rust_learning_hub
         └── mod ownership_borrowing: pub
 ```
 To see other features you can use `cargo modules generate tree  --help`
-- Now, lets even the `enum` `struct` ..etc using
+- Now, lets even the `enum` `struct` ..etc using:
+
+
 ```rust
 ├─ﮧ INSERT  1h28m|main !8 ?1
 ╰─ cargo modules generate tree --with-types

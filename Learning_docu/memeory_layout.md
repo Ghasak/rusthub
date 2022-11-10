@@ -38,11 +38,12 @@ it will show only the values that we specified in (`1`) not (`0`), which means
 it print as (11111111) but it means (0000-0000x0000-0000x0000-0000x1111-1111)
 
 - **Notice** that Maximum number that the byte can carry ove is
+```shell
 | idx | decimal number | representation type | value    |
 |-----+----------------+---------------------+----------|
 | 1   | 255            | binary              | 11111111 |
 | 2   | -              | hex                 | ff       |
-
+```
 - but the complier will fill the bytes from left to right (the cheron)
 
 
