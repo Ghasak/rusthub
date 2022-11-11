@@ -77,4 +77,3 @@ fn type_of<T>(_:T) -> & 'static str {
 - [Reference 02 ](https://stackoverflow.com/questions/41034635/how-do-i-convert-between-string-str-vecu8-and-u8/41034751#41034751)
 - [Reference 03 ](https://users.rust-lang.org/t/how-check-type-of-variable/33845)
 
-6.
