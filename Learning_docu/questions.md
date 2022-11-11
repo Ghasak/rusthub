@@ -50,4 +50,21 @@ we we can print as many of y without references?
     - Read more [here](https://stackoverflow.com/questions/30450399/does-println-borrow-or-own-the-variable)
 
 
+5. **Why can i compare a String to a &str usign if , but not when using match?**
+There is a mistamtch of types because `match` expression use patten matching, which is different from the `==` that are asssociated with `PartialEq` trait. There a secodn way to resovle this issue, by casting your `String` -> `&str` (a string slice):
+```rust
+let s: String = String::from("this is a heap allocated string .. ");
+
+match &s[..]{
+        "Holla!" => println!("It worked! ..."),
+        "Hallo!" => println!("with easy to read matches! ..."),
+        _ => println!("nothing ...")
+
+    }
+```
+- [Reference](https://stackoverflow.com/questions/49886160/why-can-i-compare-a-string-to-a-str-using-if-but-not-when-using-match)
+
+
+
+
 

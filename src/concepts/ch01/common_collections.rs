@@ -160,11 +160,17 @@ pub fn common_collections_fn() {
     }
 
     // Alternatively, the byte method returns `each raw byte` whic mgith be appropriate for your domain.
-    for b in "Здравствуйте;".bytes(){
+    for b in "Здравствуйте;".bytes() {
         println!("{}", b);
     }
-
-
+    //match comparision between heap allocated String vs stack string &str (slice &str)
+    // notice that &s[..] give us a &str (string literal which is on the stack)
+    let s: String = String::from("this is a heap allocated string .. ");
+    match &s[..] {
+        "Holla!" => println!("It worked! ..."),
+        "Hallo!" => println!("with easy to read matches! ..."),
+        _ => println!("nothing ..."),
+    }
 }
 
 // This function will take String object and give us &str literal, It is implmentation of Rust 1.

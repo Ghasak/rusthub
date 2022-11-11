@@ -42,15 +42,17 @@ crate rust_learning_hub
         ├── mod experimental_ideas: pub
         └── mod ownership_borrowing: pub
 ```
-To see other features you can use `cargo modules generate tree  --help`
-- Now, lets even the `enum` `struct` ..etc using:
+To see other features you can use `cargo modules generate tree  --help`.
+
+- Now, lets even the `enum` `struct` ..etc using
 
 
 ```rust
-├─ﮧ INSERT  1h28m|main !8 ?1
-╰─ cargo modules generate tree --with-types
+╭─ gmbp   GMacBookPro on ~/Desktop/devCode/rust_fundamentals/rusthub   
+├─ﮧ INSERT  17h52m|main !6 ?3
+╰─ cargo modules generate tree --with-types                                                                 祥:23ms  [   Nov 11, 2022 -  9:15:23 PM ]
 
-crate rust_learning_hub
+crate rusthub
 ├── mod concepts: pub(crate)
 │   ├── mod ch01: pub
 │   │   ├── mod common_collections: pub
@@ -59,6 +61,8 @@ crate rust_learning_hub
 │   │   │   └── fn type_of: pub
 │   │   ├── mod experimental_ideas: pub
 │   │   │   └── fn experiment_sum_fn: pub
+│   │   ├── mod memeory_investigating: pub
+│   │   │   └── fn investigate_memeory_allocation: pub
 │   │   └── mod ownership_borrowing: pub
 │   │       ├── fn about_owner_ship_concepts: pub
 │   │       ├── fn func1: pub
