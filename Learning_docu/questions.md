@@ -100,6 +100,7 @@ You can also use a backspace character to move the cursor back one space.
 const BACKSPACE: char = 8u8 as char;
 print!("{}\rThis replaces the previous line", BACKSPACE);
 ```
+
 Note:
 
 This works best for simple incrementing values like this. If you write Hello,
@@ -110,6 +111,11 @@ give you the terminal size.
 
 - [How do i over write console output ...](https://stackoverflow.com/questions/59890270/how-do-i-overwrite-console-output)
 
-
 7. **Can we implement the static class variable in rust structu? **
+- Answer, Yes, we can do, check the reference page for implementation named
+  **rust struct with class variable**
+
+- [Object counter (num.instances of object that
+  exist](https://stackoverflow.com/questions/67959660/object-counter-num-instances-of-object-that-exist)
+- [Detecting new struct intitalization](https://stackoverflow.com/questions/36993255/detecting-new-struct-initialization)
 

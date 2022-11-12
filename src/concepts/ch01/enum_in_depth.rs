@@ -11,4 +11,20 @@ pub fn enum_and_pattern_mathcing() {
 
     println!("We have home     -> {:#?}", home);
     println!("We have  loopback-> {:#?}", loopback);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

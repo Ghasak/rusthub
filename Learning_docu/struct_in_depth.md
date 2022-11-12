@@ -68,3 +68,5 @@
 
 - You can sepeated `imp` with two or more blocks which will be helpful later
   when we use it in `generic` and `traits`.
+
+- Cane we implment class variable whic
