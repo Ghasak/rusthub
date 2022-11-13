@@ -5,7 +5,8 @@ available yet (up to `11/11/2022`).
 
 ## Debugging with lldb
 
-An alternative, you can use the `lldb` which comes with the debugger of the `vs-code` or via `nvim`. Usually I use:
+An alternative, you can use the `lldb` which comes with the debugger of the
+`vs-code` or via `nvim`. Usually I use:
 
 1. In the terminal use the shell command
 ```shell

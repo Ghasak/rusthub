@@ -1,5 +1,10 @@
 # Common Collections
 
+**Notes**
+
+- `i32` `u32` ..etc, are called `values implement the Copy trait`.
+- `String`, `HashMap` ..etc. are called `owned value`
+
 Basically we have:
 
 1. a `vector` allows you to store a varaible number of values next to each
@@ -210,5 +215,125 @@ format!("{}{}", s1, s2);
     }
     ```
 
+## HashMap
+
+Basically, there are two rules we have for the ownership:
+
+- For types that implement the `Copy` trait, like `i32` the values are copied
+  to the `hasmap`.
+- For owned value like `String`, the values will be moved and the hash map will
+  be the owner of those values, as demostrated in the follwoing example:
+
+```rust
+
+```
+
+- If you store using the `clone()`, it means you have alraedy created a clone
+  on the heap and given to the `has-map`,
+
+  ```rust
+  //map.insert(first_field.clone(), field_value.clone());
+  ```
+
+- If you will store `reference`, then you need to be sure that the
+  `first_field`, and `field_value` should be both in the scope as long as the
+  `has-map` is using them.
+
+  ````rust
+
+      let first_field = String::from("Favoriate color");
+      let field_value = String::from("Blue");
+
+      let mut map: HashMap<&String, &String> = HashMap::new();
+
+      //map.insert(first_field.clone(), field_value.clone());
+      map.insert(&first_field, &field_value);
+
+      print!("{:#?}", first_field);
 
 
+      ```
+
+  ````
+
+**Note** as you can see above that we annotiate the `map` using `<&String, &String>`, as we will store references not the real value.
+
+### Create a generic function to print the HashMap
+
+We will create a `generic` function that can accept any value, this function
+will not affect the `ownership` as it is borrowing the hashmap and its value
+all without taking ownership.
+
+```rust
+
+    use std::fmt::Debug;
+    use std::fmt::Display;
+    /// This function is generic and be used to any value and any type, to print their values
+    fn fancy_hash_map_fn_generic<T: Display + Debug, U: Display + Debug>(
+        my_hash_map: &HashMap<&T, &U>,
+    ) {
+        for (key, value) in my_hash_map.iter() {
+            println!("our value is => key: {:#?}, value: {:#?}", *key, *value);
+        }
+    }
+    // Examples ---
+
+    let mut map : HashMap<&String, &i32> = HashMap::new();
+
+    let c: String = String::from("keyAddress  -1- ");
+    let d: String = String::from("keyAddress  -2- ");
+    let e: String = String::from("keyAddress  -3- ");
+
+    map.insert(&c,&1);
+    map.insert(&d,&2);
+    map.insert(&e,&3);
+
+
+    fancy_hash_map_fn_generic(&map);
+
+    /// Fancy function to print the items of the hash_map, it will not affecting the ownership
+    /// Argument: HashMap --> <&T,&U>
+    fn fancy_hash_map_fn_generic_enhanced<T, U>(my_hash_map: &HashMap<&T, &U>)
+    where
+        T: Display + Debug,
+        U: Display + Debug,
+    {
+        for (key, value) in my_hash_map.iter() {
+            println!("our value is => key: {:#?}, value: {:#?}", *key, *value);
+        }
+    }
+
+```
+
+
+**Note**
+- We can get the value of any key using the `API`
+    ```rust
+
+        //the api also bring us back the original value of the given key, if
+        existed, and if not exist this key, it will be set to val
+        let val = hasmap_name.entry(key).or_insert(val);
+
+    let mut scores = HashMap::new();
+    let a = String::from("Blue");
+    let b = String::from("Yellow");
+    let c = String::from("Blue");
+    let d = String::from("Red");
+
+    scores.insert(&a, &10);
+    scores.entry(&a).or_insert(&50);
+    scores.entry(&b).or_insert(&50);
+    scores.entry(&d).or_insert(&100);
+    let w = String::from("wow");
+
+    println!("================ Note Important ========================",);
+    println!("Notice that we get the value of the key of &a, -> {:#?}\n if key is not existed, then it will be setted to 1000 -> {:#?}", scores.entry(&a).or_insert(&0).clone(), scores.entry(&w).or_insert(&1000));
+    println!("========================================================",);
+
+
+    ```
+    ```shell
+        ================ Note Important ========================
+        Notice that we get the value of the key of &a, -> 10
+        if key is not existed, then it will be setted to 1000 -> 1000
+    ```

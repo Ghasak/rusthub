@@ -1,5 +1,6 @@
 # Helper Idomtics
-This is a collection of many useful `API` functions and other definitions which are used almost on reach rust project.
+This is a collection of many useful `API` functions and other definitions which
+are used almost on reach rust project.
 
 
 
@@ -42,7 +43,8 @@ println!("what is the value of right now ... ? {:#?}", y);
 
 5. Possibility of converating `String` object to `&str` literal
 This was a challenging as we need to understand more about the `lifetime`
-- This can speed up significantly our work on `string` as we are dealing with `&str` not `String`.
+- This can speed up significantly our work on `string` as we are dealing with
+  `&str` not `String`.
 
 ```rust
 
@@ -59,8 +61,6 @@ This was a challenging as we need to understand more about the `lifetime`
         // you are passing here item which is a reference, (memory address), you need to dererence it at first.
         println!("We have now -> {}, with type -> {}", item, super::common_collections::type_of(*item));
     }
-
-
 
 }
 

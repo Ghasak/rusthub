@@ -50,8 +50,11 @@ we we can print as many of y without references?
   they take referrence silently is part of that difference.
   - Read more [here](https://stackoverflow.com/questions/30450399/does-println-borrow-or-own-the-variable)
 
-5. **Why can i compare a String to a &str usign if , but not when using match?**
-   There is a mistamtch of types because `match` expression use patten matching, which is different from the `==` that are asssociated with `PartialEq` trait. There a secodn way to resovle this issue, by casting your `String` -> `&str` (a string slice):
+5. **Why can i compare a String to a &str usign if , but not when using
+   match?** There is a mistamtch of types because `match` expression use patten
+   matching, which is different from the `==` that are asssociated with
+   `PartialEq` trait. There a secodn way to resovle this issue, by casting your
+   `String` -> `&str` (a string slice):
 
 ```rust
 let s: String = String::from("this is a heap allocated string .. ");

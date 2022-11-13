@@ -1,87 +1,38 @@
-#![allow(dead_code)]
-#[macro_use]
-extern crate lazy_static;
+// use std::io ;
+// use std::io::stdin;
 
-use std::sync::atomic;
-use std::sync::{Arc, Mutex, Weak};
+#![allow(clippy::assign_op_pattern)]
+#![allow(unused_imports)]
+#![allow(dead_code)]
+#![allow(non_camel_case_types)]
+#![allow(unused_variables)]
+use std::io::{self, stdin, BufReader, Write};
+use std::thread::sleep;
+use std::time::Duration;
+
+//use once_cell::sync::OnceCell;
+
+mod concepts;
+use concepts::ch01::{
+    common_collections, enum_in_depth, experimental_ideas, memeory_investigating,
+    ownership_borrowing, struct_in_depth_2, structs_in_depth, error_handling_in_depth
+};
+use concepts::create_text;
 
 fn main() {
-    #[derive(Debug, Clone)]
-    pub struct Employee {
-        pub name: String,
-    }
+    // create_text();
+    // ownership_borrowing::about_owner_ship_concepts();
+    // common_collections::common_collections_fn();
+    // experimental_ideas::experiment_sum_fn();
+    // memeory_investigating::investigate_memeory_allocation();
+    // structs_in_depth::using_structs_to_structure_related_data();
+    // experimental_ideas::over_write_console_output();
+    // enum_in_depth::enum_and_pattern_mathcing();
 
-    impl Employee {
-        pub fn new(name: String) -> Arc<Self> {
-          //  println!("Entity named {} is created ..", name);
-            let emp = Arc::new(Employee { name });
-
-            bump_counter();
-            remember_instance(emp.clone());
-            emp
-        }
-
-        /*
-         * Lets adde -1- each time we create an employee
-         */
-    }
-
-    static COUNTER: atomic::AtomicUsize = atomic::AtomicUsize::new(0);
-
-    fn bump_counter() {
-        COUNTER.fetch_add(1, atomic::Ordering::SeqCst);
-    }
-
-    pub fn get_counter() -> usize {
-        COUNTER.load(atomic::Ordering::SeqCst)
-    }
-
-    lazy_static! {
-        static ref INSTANCES: Mutex<Vec<Weak<Employee>>> = Mutex::new(vec![]);
-    }
+    // struct_in_depth_2::detecting_new_struct_initialization();
+    //common_collections::hash_map();
+    error_handling_in_depth::error_handling_concept();
 
 
-    fn remember_instance(entity: Arc<Employee>) {
-        // Downgrade to a weak reference.  Type constraint is just for clarity.
-        let entity: Weak<Employee> = Arc::downgrade(&entity);
-        INSTANCES
-            // Lock mutex
-            .lock()
-            .expect("INSTANCES mutex was poisoned")
-            // Push entity
-            .push(entity);
-    }
 
-    pub fn get_instances() -> Vec<Arc<Employee>> {
-        /*
-        This is about as inefficient as I could write this, but again, without
-        knowing your access patterns, I can't really do any better.
-        */
-        INSTANCES
-            // Lock mutex
-            .lock()
-            .expect("INSTANCES mutex was poisoned")
-            // Get a borrowing iterator from the Vec.
-            .iter()
-            /*
-            Convert each `&Weak<Entity>` into a fresh `Arc<Entity>`.  If we
-            couldn't (because the weak ref is dead), just drop that element.
-            */
-            .filter_map(|weak_entity| weak_entity.upgrade())
-            // Collect into a new `Vec`.
-            .collect()
-    }
-
-    let _emp1 = Employee::new("Jack".to_string());
-    // println!("{:#?}", _emp1);
-    // println!("{:#?}", get_counter());
-    let _emp2 = Employee::new("Michael".to_string());
-    // println!("{:#?}", _emp2);
-    // println!("{:#?}", get_counter());
-
-    println!("Counter: {}", get_counter());
-
-    for ent in get_instances() {
-        println!("-> {}", ent.name)
-    }
 }

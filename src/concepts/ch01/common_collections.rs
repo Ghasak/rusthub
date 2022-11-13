@@ -181,3 +181,139 @@ pub fn string_to_static_str(s: String) -> &'static str {
 pub fn type_of<T>(_: T) -> &'static str {
     std::any::type_name::<T>()
 }
+
+/// This function will tell us eveything about hashtable ...
+pub fn hash_map() {
+    println!("The general form is: HashMap<K,V>, Chapter -8- 8.3",);
+    println!("Storign keys with Associated Values in Hash Maps ..",);
+
+    use std::collections::HashMap;
+
+    let mut scores: HashMap<String, u32> = HashMap::new();
+
+    scores.insert(String::from("blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    for item in scores.iter() {
+        println!(
+            "Printing the item object consists of key and value {:#?}",
+            item
+        )
+    }
+
+    for (key, value) in scores.iter() {
+        println!("our value is => key: {:#?}, value: {:#?}", key, value);
+    }
+
+    // Accessing sepcific item form our hash_map
+
+    let searching_key = String::from("blue");
+
+    // notice now that the score is own the value that we copied form the hash_map
+    let score = scores.get(&searching_key).copied().unwrap_or(0);
+    println!("Value of score for {} is -> {}", searching_key, score);
+
+    // Hash Maps and OwnerShip
+    // For types that implemetn the `Copy` trait, like `i32`, the values are copied into the hash map. For owned vlaues like `String`, the values will be moved and the hash map will be the owner ofthose values, as demonstrted in the
+
+    let first_field = String::from("Favoriate color");
+    let field_value = String::from("Blue");
+
+    let mut map: HashMap<&String, &String> = HashMap::new();
+
+    //map.insert(first_field.clone(), field_value.clone());
+    map.insert(&first_field, &field_value);
+
+    print!("{:#?}", first_field);
+    println!("\n========================================================",);
+    println!("       overwriting a value                         ",);
+    println!("\n========================================================",);
+
+    let a = String::from("Wow");
+    let b = String::from("can we do that");
+    map.insert(&a, &b);
+
+    ///This function can print value-key for hashmap
+    // It is implemented for a type key:`&String`-value:`&String`
+    fn fancy_hash_map_fn(my_hash_map: &HashMap<&String, &String>) {
+        for (key, value) in my_hash_map.iter() {
+            println!("our value is => key: {:?}, value: {:?}", key, value);
+        }
+    }
+
+    fancy_hash_map_fn(&map);
+
+    println!("\n========= We will overwrite the map ===================",);
+    use std::fmt::Debug;
+    use std::fmt::Display;
+    /// This function is generic and be used to any value and any type, to print their values
+    fn fancy_hash_map_fn_generic<T: Display + Debug, U: Display + Debug>(
+        my_hash_map: &HashMap<&T, &U>,
+    ) {
+        for (key, value) in my_hash_map.iter() {
+            println!("our value is => key: {:#?}, value: {:#?}", *key, *value);
+        }
+    }
+    // Examples ---
+
+    let mut map: HashMap<&String, &i32> = HashMap::new();
+
+    let c: String = String::from("keyAddress  -1- ");
+    let d: String = String::from("keyAddress  -2- ");
+    let e: String = String::from("keyAddress  -3- ");
+
+    map.insert(&c, &1);
+    map.insert(&d, &2);
+    map.insert(&e, &3);
+
+    fancy_hash_map_fn_generic(&map);
+    /// Fancy function to print the items of the hash_map, it will not affecting the ownership
+    /// Argument: HashMap --> <&T,&U>
+    fn fancy_hash_map_fn_generic_enhanced<T, U>(my_hash_map: &HashMap<&T, &U>)
+    where
+        T: Display + Debug,
+        U: Display + Debug,
+    {
+        for (key, value) in my_hash_map.iter() {
+            println!("our value is => key: {:#?}, value: {:#?}", *key, *value);
+        }
+    }
+
+    println!("========================================================",);
+    println!(" adding a key and value only if a key isn't present",);
+    println!("========================================================",);
+
+    println!("We are using the method: entry",);
+    //clearer trait bounds with `where` clauses
+
+    let mut scores = HashMap::new();
+    let a = String::from("Blue");
+    let b = String::from("Yellow");
+    let c = String::from("Blue");
+    let d = String::from("Red");
+
+    scores.insert(&a, &10);
+    scores.entry(&a).or_insert(&50);
+    scores.entry(&b).or_insert(&50);
+    scores.entry(&d).or_insert(&100);
+    let w = String::from("wow");
+
+    println!("================ Note Important ========================",);
+    println!("Notice that we get the value of the key of &a, -> {:#?}\n if key is not existed, then it will be setted to 1000 -> {:#?}", scores.entry(&a).or_insert(&0).clone(), scores.entry(&w).or_insert(&1000));
+    println!("========================================================",);
+    fancy_hash_map_fn_generic_enhanced(&scores);
+
+    println!("========================================================",);
+    println!("    Update a value base don the old value ",);
+    println!("========================================================",);
+
+    let text = "Hello world wornderful world ... Can we see if we got the world as we expected, wonderful world";
+    let mut map = HashMap::new();
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        let our_type = super::common_collections::type_of(&count);
+        *count += 1;
+        println!("value of count: word::{} -> count::{} -> type::{}", word,count, &our_type);
+    }
+    println!("{:?}", map);
+}
