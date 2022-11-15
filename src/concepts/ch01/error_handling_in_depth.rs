@@ -1,5 +1,6 @@
 #![allow(unused_must_use)]
 
+
 pub fn error_handling_concept() {
     use std::fs::File;
     use std::io::ErrorKind;
@@ -38,7 +39,7 @@ pub fn error_handling_concept() {
         }
     }
 
-    //read_username_file();
+    read_username_file();
 
     ///Shortcut for propgating errors: the ? Operator
 
@@ -54,5 +55,7 @@ pub fn error_handling_concept() {
         File::open("hello.txt")?.read_to_string(&mut username)?;
         Ok(username)
     }
-    //read_username_from_file_enhanced();
+
+
+
 }

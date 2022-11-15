@@ -34,6 +34,10 @@ pub fn experiment_sum_fn() {
     println!("{}", sum);
 }
 /// This method is give use a indicator to be printed on same line
+///
+/// # Printing on same line
+///
+/// Args: No arguments
 pub fn over_write_console_output() {
     let mut stdout = std::io::stdout();
 
@@ -48,4 +52,124 @@ pub fn over_write_console_output() {
         std::thread::sleep(std::time::Duration::from_millis(20));
     }
     println!();
+}
+
+use crossterm::{cursor, terminal, ExecutableCommand, Result};
+//use std::io::{stdout, Write};
+pub fn over_write_console_output_enhanced() -> Result<()> {
+    let mut stdout = stdout(); // lock stdout and use the same locked instance throughout
+
+    writeln!(
+        stdout,
+        "|{0:<25} | {1:<11} | {2:<10}",
+        "URL Path", "Status Code", "Version"
+    )?;
+    writeln!(
+        stdout,
+        "|{0:<25} | {1:<11} | {2:<10}",
+        "https://google.com", 200, 9
+    )?;
+    writeln!(
+        stdout,
+        "|{0:<25} | {1:<11} | {2:<10}",
+        "https://yahoo.com", 200, 15
+    )?;
+
+    // wait 2 seconds before replacing lines
+    std::thread::sleep(std::time::Duration::from_secs(2));
+
+    stdout.execute(cursor::MoveUp(2))?;
+    stdout.execute(terminal::Clear(terminal::ClearType::FromCursorDown))?;
+    writeln!(
+        stdout,
+        "|{0:<25} | {1:<11} | {2:<10}",
+        "https://bing.com", 200, 3
+    )?;
+    writeln!(
+        stdout,
+        "|{0:<25} | {1:<11} | {2:<10}",
+        "https://duckduckgo.com", 200, 1
+    )?;
+
+    Ok(())
+}
+
+///Another function used to print multi-lines on console
+///
+/// # multi-line overwriting the console
+///
+///
+/// ## Args:
+/// - `currently`: Not existed arg
+///
+/// ## Output:
+/// - `simulation`: simulation points printed on the console, shows the performance progress.
+///
+/// ```rust
+///
+///    let mut stdout = stdout(); // lock stdout and use the same locked instance throughout
+///    for i in 0..100 {
+///        writeln!(stdout,"")?;
+///        writeln!(
+///            stdout,
+///            "|{0:<25} | {1:<11} | {2:<10} |",
+///            "Maximum Likelihood", "Est.", "t-value"
+///        )?;
+///        writeln!(stdout,"")?;
+///
+/// ```
+/// - [How to overwite multiple line in rust](https://stackoverflow.com/questions/72416445/how-to-overwrite-multiple-line-in-rust)
+
+pub fn another_multi_line_console_cursor_output() -> Result<()> {
+    let mut stdout = stdout(); // lock stdout and use the same locked instance throughout
+    for i in 0..100 {
+        writeln!(
+            stdout,
+            "======================================================="
+        )?;
+        writeln!(
+            stdout,
+            "|{0:<25} | {1:<11} | {2:<10} |",
+            "Maximum Likelihood", "Est.", "t-value"
+        )?;
+        writeln!(
+            stdout,
+            "======================================================="
+        )?;
+
+        writeln!(
+            stdout,
+            "|{0:<25} | {1:<11} | {2:<10} |",
+            "LL(beta)",
+            i,
+            i + 1000
+        )?;
+
+        writeln!(
+            stdout,
+            "|{0:<25} | {1:<11} | {2:<10} |",
+            "AIC",
+            i,
+            i + 100000
+        )?;
+
+        writeln!(
+            stdout,
+            "|{0:<25} | {1:<11} | {2:<10} |",
+            "BIC",
+            i * 2,
+            i * 2 * 1000
+        )?;
+
+        writeln!(
+            stdout,
+            "======================================================="
+        )?;
+
+        // wait 2 seconds before replacing lines
+        std::thread::sleep(std::time::Duration::from_millis(100));
+        stdout.execute(cursor::MoveUp(7))?; // remember to move same number of writeln! occurence
+        stdout.execute(terminal::Clear(terminal::ClearType::FromCursorDown))?; // can be ommited.
+    }
+    Ok(())
 }

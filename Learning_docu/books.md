@@ -15,6 +15,7 @@
 - [pyo3 user guide](https://pyo3.rs/v0.17.3/)
 - [The Rust Performance Book](https://nnethercote.github.io/perf-book/profiling.html)
 - [Rust Existing C++](https://google.github.io/autocxx/cpp_types.html)
+- [Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 
 ## Must Read
 

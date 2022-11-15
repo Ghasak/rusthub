@@ -114,6 +114,18 @@ give you the terminal size.
 
 - [How do i over write console output ...](https://stackoverflow.com/questions/59890270/how-do-i-overwrite-console-output)
 
+7. **How about the multilines printing using the overwrite the console**
+The one I found is using the crate called `crossterm ` which I use to write and
+generate multi-lines to print on the console. Read the implementation in your
+
+- [ ](https://stackoverflow.com/questions/72416445/how-to-overwrite-multiple-line-in-rust)
+
+
+
+
+
+
+
 7. **Can we implement the static class variable in rust structu? **
 - Answer, Yes, we can do, check the reference page for implementation named
   **rust struct with class variable**

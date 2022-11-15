@@ -79,3 +79,10 @@ cargo install flamegraph
 ```rust
 flamegraph -o my_flamegraph.svg -- ./target/debug/rust_learning_hub
 ```
+
+## Documentation
+I use the both the defintion like `///` and the `//?` on the main page. I also
+not include the dependencies.
+```rust
+cargo docu --no-deps --open
+```

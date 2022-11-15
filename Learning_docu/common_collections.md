@@ -20,8 +20,8 @@ Basically we have:
 #![allow(unused_variables)]
 
 pub fn common_collections_fn() {
-    // create a new vector
 
+    // create a new vector
     let mut v: Vec<String> = Vec::new();
     //let adding:String = String::new();
 
