@@ -8,3 +8,5 @@ pub fn create_text(){
 }
 
 pub mod ch01;
+pub mod ch02;
+

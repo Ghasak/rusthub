@@ -313,7 +313,10 @@ pub fn hash_map() {
         let count = map.entry(word).or_insert(0);
         let our_type = super::common_collections::type_of(&count);
         *count += 1;
-        println!("value of count: word::{} -> count::{} -> type::{}", word,count, &our_type);
+        println!(
+            "value of count: word::{} -> count::{} -> type::{}",
+            word, count, &our_type
+        );
     }
     println!("{:?}", map);
 }

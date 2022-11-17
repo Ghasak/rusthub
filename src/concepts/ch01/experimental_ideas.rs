@@ -173,3 +173,37 @@ pub fn another_multi_line_console_cursor_output() -> Result<()> {
     }
     Ok(())
 }
+
+/// function used to generate random names
+///
+/// ## generate random emp names
+///
+/// We are using here the random generator to pick value from the list
+/// Random choosing from a list
+use rand::seq::SliceRandom;
+
+pub fn generate_emp_names(n: i32) {
+    let first_name_list = ["Michael", "Jim", "Dwight", "Andy"];
+    let last_name_list = ["Scouts", "Hibert", "Shrout", "Bernarnd"];
+
+    for idx in 0..n {
+        let first_name = first_name_list.choose(&mut rand::thread_rng());
+        let last_name = last_name_list.choose(&mut rand::thread_rng());
+        let combined_name = format!("{} {}", first_name.unwrap(), last_name.unwrap());
+        println!("[+] [{}] Employee -> {}", idx, combined_name);
+    }
+}
+
+/// Employee Random generator running function
+pub fn executte_random_employee_generater() {
+    use std::io;
+    let mut n: String = String::new();
+    io::stdin()
+        .read_line(&mut n)
+        .expect("Something went wrong !!!!!");
+    let num: i32 = n.trim().parse::<i32>().unwrap();
+
+    println!("Generate number of employees {}... \n", num);
+    generate_emp_names(num);
+}
+

@@ -22,6 +22,8 @@ use concepts::ch01::{
 use concepts::create_text;
 
 use self::concepts::ch01::enum_in_depth::enum_and_pattern_mathcing;
+
+use concepts::ch02::{generic};
 //? Out main function
 ///
 //? # Main example library
@@ -41,11 +43,15 @@ fn main() {
     // structs_in_depth::using_structs_to_structure_related_data();
     //experimental_ideas::over_write_console_output();
     //experimental_ideas::over_write_console_output_enhanced();
-    experimental_ideas::another_multi_line_console_cursor_output();
+    //experimental_ideas::another_multi_line_console_cursor_output();
+    // experimental_ideas::executte_random_employee_generater();
     // enum_in_depth::enum_and_pattern_mathcing();
     // struct_in_depth_2::detecting_new_struct_initialization();
     //common_collections::hash_map();
     //error_handling_in_depth::error_handling_concept();
+    // error_handling_in_depth::learning_about_error();
+    //generic::learning_more_about_generics();
+    generic::working_with_generic();
+
 
 }
-

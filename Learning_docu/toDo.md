@@ -9,20 +9,21 @@
 
 - Writing applications for the `WebDev`.
 - Writing CLI applications
-- Writing algorithmic `Advanced Econometrics` modeling running on high-speed.
 - Checking probability advanced topic with Rust
 - Develop similar Pythonic `machine learning` and `deep learning` applications.
 
 
 
 # How to learn Rust
+- Writing algorithmic `Advanced Econometrics` modeling running on high-speed.
 
 - [x] String types and their usages
 - [ ] Smart pointers (box, ref ..etc. ).
-- [ ] Traits in OOP.
-- [ ] Lifetime.
+- [x] Traits in OOP.
+- [x] Lifetime.
 - [x] Ownership and borrowing.
 - [x] Stack and Heap.
+
 
 
 

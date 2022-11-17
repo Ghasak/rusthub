@@ -1,7 +1,6 @@
 #![allow(unused_must_use)]
-
-
 pub fn error_handling_concept() {
+
     use std::fs::File;
     use std::io::ErrorKind;
 
@@ -55,7 +54,41 @@ pub fn error_handling_concept() {
         File::open("hello.txt")?.read_to_string(&mut username)?;
         Ok(username)
     }
-
-
-
 }
+
+/// Recoverable error handling with propgating errors
+///
+/// ### RECOVERABLE ERRORS
+///
+/// Descritpion:
+/// Errors that are meant to be handled are reutred with the `Result` enum.
+pub fn learning_about_error() {
+    fn ultimate_answer(guess: i64) -> Result<(), String> {
+        if guess == 42 {
+            return Ok(());
+        }
+
+        Err("Wrong answer".to_string())
+    }
+    // You can also alter the return value to be String
+    fn ultimate_answer_enhanced(guess: i64) -> Result<String, String> {
+        if guess == 42 {
+            return Ok("The answer is correct:".to_string());
+        }
+
+        Err("This is wrong answer".to_string())
+    }
+
+    for i in 0..100 {
+        let result = ultimate_answer_enhanced(i);
+        if result.is_ok() {
+            println!("We got the result => {:?} at {}", result, i);
+        }
+        else{
+            println!("Error Message written to -> {:?} at {}",result, i ) ;
+        }
+    }
+}
+
+
+
