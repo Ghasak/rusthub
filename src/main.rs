@@ -23,7 +23,7 @@ use concepts::create_text;
 
 use self::concepts::ch01::enum_in_depth::enum_and_pattern_mathcing;
 
-use concepts::ch02::{generic};
+use concepts::ch02::generic;
 //? Out main function
 ///
 //? # Main example library
@@ -33,7 +33,15 @@ use concepts::ch02::{generic};
 // Example:
 /// ```shell
 ///     cargo run --quiet
-/// ````
+/// ```
+/// =================== Decoration for the console output ====================
+extern crate prettycli;
+use prettycli::*;
+extern crate colored; // not needed in Rust 2018+
+use colored::*;
+use concepts::my_emoji;
+/// ==========================================================================
+
 fn main() {
     // create_text();
     // ownership_borrowing::about_owner_ship_concepts();
@@ -51,7 +59,18 @@ fn main() {
     //error_handling_in_depth::error_handling_concept();
     // error_handling_in_depth::learning_about_error();
     //generic::learning_more_about_generics();
-    generic::working_with_generic();
+    // generic::working_with_generic();
+    // generic::generic_function_example_01();
+    // generic::generic_function_example_02();
+    // generic::generic_function_example_03();
+    // generic::generic_function_example_04();
 
+    // fn return_ref(name : String) -> &'static str{
+    //     let country = "Japan";
+    //     let result = format!("{} added to {}", name, &country);
+    //
+    //     return &result
+    //
+    // }
 
 }

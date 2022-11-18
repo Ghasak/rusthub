@@ -63,7 +63,133 @@ pub fn working_with_generic() {
 
     print_number(8);
     print_number(10);
+}
+
+pub fn generic_function_example_01() {
+    use std::fmt::Debug;
+
+    #[derive(Debug)]
+    struct Animal {
+        name: String,
+        age: u8,
+    }
+
+    fn print_item<T: Debug>(item: T) {
+        println!("Here is your item: {:?}", item)
+    }
+
+    let charlie = Animal {
+        name: String::from("Charlie"),
+        age: 2,
+    };
+
+    print_item(charlie)
+}
+
+pub fn generic_function_example_02() {
+    // More typing
+    use std::cmp::PartialOrd;
+    use std::fmt::Display;
+    /// Function to implement two types of traits
+    /// and utilize them to our input args
+    fn compare_and_display<T: Display, U: Display + PartialOrd>(statement: T, num_1: U, num_2: U) {
+        println!(
+            "{}! Is {} greater than {}? {}",
+            statement,
+            num_1,
+            num_2,
+            num_1 > num_2
+        )
+    }
+
+    compare_and_display("Listen up! ", 9, 8);
+}
+
+pub fn generic_function_example_03() {
+    use std::fmt::{Debug, Display};
+    #[derive(Debug)]
+    struct Animal {
+        name: String,
+        age: u8,
+    }
+    // More typing
+    use std::cmp::PartialOrd;
+    /// Function to implement two types of traits
+    /// and utilize them to our input args
+    fn compare_and_display<T: Display, U: Display + PartialOrd, V: Debug>(
+        statement: T,
+        num_1: U,
+        num_2: U,
+        animal: V,
+    ) {
+        println!(
+            "{}! Is {} greater than {}? {}, and here we have animal -> {:#?}",
+            statement,
+            num_1,
+            num_2,
+            num_1 > num_2,
+            animal
+        )
+    }
+
+    let charile = Animal {
+        name: String::from("Charile"),
+        age: 10,
+    };
+
+    compare_and_display("Listen up! ", 9, 8, charile);
+}
+/// Implement Display to your struct
+///
+///
+///
+///
+/// Description:
+/// For current implementation, the `strcut` has no `dervie` for `Display` similar to `Debug`, so instead, we need to implment that manually.
+/// using:
+/// ```rust
+///    use std::fmt::{self,Debug, Display};
+///    impl fmt::Display for Animal {
+///        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+///            write!(f, "({}, {})", self.name, self.age)
+///        }
+///    }
+///
+/// ```
+pub fn generic_function_example_04() {
+    /// If you want to implement a Display trait, you must hard-code it to your struct
+    use std::fmt::{self,Debug, Display};
+
+    #[derive(Debug)]
+    struct Animal {
+        name: String,
+        age: u8,
+    }
+
+    impl fmt::Display for Animal {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            write!(f, "({}, {})", self.name, self.age)
+        }
+    }
+
+    let charlie = Animal {
+        name: "Charlie".to_string(),
+        age: 12,
+    };
+    // Notice that we don't need to specifiy the ? here
+    println!("{}", charlie);
 
 
+    // If you didnt implment the `Display` above, you cannot use it here in the generic
+    // while the `Debug` trait is alreayd being used in the macro `Debug`.
+    fn show_in_generic<T: Display + Debug>(animal:T) {
+        println!("{}", animal );
+
+    }
+
+    show_in_generic(charlie);
 
 }
+
+
+

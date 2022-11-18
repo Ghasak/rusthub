@@ -182,6 +182,8 @@ pub fn another_multi_line_console_cursor_output() -> Result<()> {
 /// Random choosing from a list
 use rand::seq::SliceRandom;
 
+use crate::concepts;
+
 pub fn generate_emp_names(n: i32) {
     let first_name_list = ["Michael", "Jim", "Dwight", "Andy"];
     let last_name_list = ["Scouts", "Hibert", "Shrout", "Bernarnd"];
@@ -206,4 +208,35 @@ pub fn executte_random_employee_generater() {
     println!("Generate number of employees {}... \n", num);
     generate_emp_names(num);
 }
+/// Implementing emojis and colors for console output
+/// ## Emoji and color function
+/// Args:
+/// - No args, simple output in the console.
+/// This function is used for demostration only
+pub fn output_with_emoji_and_colors() {
+    extern crate prettycli;
+    use prettycli::*;
+    extern crate colored; // not needed in Rust 2018+
+    use colored::*;
+    use concepts::my_emoji;
+    fn return_ref(name: String) -> String {
+        let country = "Japan";
+        let result = format!("{} added to {}", name, &country);
+        result
+    }
+    let mycounter = return_ref("wow".to_string());
+    info("We will print the number  ..."); //println!("Lets print the country: {}",mycounter );;
+    println!("Lets print the country: {}", mycounter);
 
+    for i in 0..10 {
+        let temp_idx = format!("{i}");
+        //println!("The value of i is -> {}".blue(), temp_idx);
+        println!(
+            "[{}] {}{} {} !",
+            concepts::my_emoji("rocket"),
+            "current value is =>".purple(),
+            "it is ".green(),
+            temp_idx.red().bold()
+        );
+    }
+}
