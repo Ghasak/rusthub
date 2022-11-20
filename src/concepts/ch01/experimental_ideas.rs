@@ -54,7 +54,7 @@ pub fn over_write_console_output() {
     println!();
 }
 
-use crossterm::{cursor, terminal, ExecutableCommand, Result};
+use crossterm::{cursor, style::Stylize, terminal, ExecutableCommand, Result};
 //use std::io::{stdout, Write};
 pub fn over_write_console_output_enhanced() -> Result<()> {
     let mut stdout = stdout(); // lock stdout and use the same locked instance throughout
@@ -216,9 +216,9 @@ pub fn executte_random_employee_generater() {
 pub fn output_with_emoji_and_colors() {
     extern crate prettycli;
     use prettycli::*;
-    extern crate colored; // not needed in Rust 2018+
-    use colored::*;
-    use concepts::my_emoji;
+    // extern crate colored; // not needed in Rust 2018+
+    // use colored::*;
+    // use concepts::my_emoji;
     fn return_ref(name: String) -> String {
         let country = "Japan";
         let result = format!("{} added to {}", name, &country);
@@ -234,9 +234,44 @@ pub fn output_with_emoji_and_colors() {
         println!(
             "[{}] {}{} {} !",
             concepts::my_emoji("rocket"),
-            "current value is =>".purple(),
+            "current value is =>".blue(),
             "it is ".green(),
             temp_idx.red().bold()
+        );
+    }
+}
+/// meaning of wrap_or function
+///
+/// ## wrap_or() meaning
+///
+///
+/// ### Description:
+/// Meaning of the `wrap_or` is like unwrap a value that we don't know, then once we open it, we give it a `value -> 0`
+/// point to be taken for using the `match` for the `Result<T,E>` enum, is that both `T` and `E` must be same type.
+pub fn meaning_of_wrap_or() {
+    //extern crate colored; // not needed in Rust 2018+
+    //use colored::*;
+    let mut s: String = String::new();
+    println!("How many points you want to create ... ? ");
+    s.clear();
+    std::io::stdin()
+        .read_line(&mut s)
+        .expect("Maybe not working now.. ");
+
+    // This is what the unwrap_or() function is doing
+    // let output_num = match s.trim().parse::<i32>() {
+    //     Ok(val) => val,
+    //     Err(_)=> 0
+    // };
+    let output_num = s.trim().parse::<i32>().unwrap_or(0);
+
+    for i in 0..output_num {
+        println!(
+            "[{}] {} {} {}",
+            concepts::my_emoji("robot"),
+            "wow ws".yellow(),
+            "->".blue(),
+            format!("{}", i).red()
         );
     }
 }

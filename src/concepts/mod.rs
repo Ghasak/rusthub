@@ -5,6 +5,7 @@ pub fn create_text() {
 
 pub mod ch01;
 pub mod ch02;
+pub mod easy_rust;
 
 use std::collections::{self, HashMap};
 

@@ -16,7 +16,7 @@
 - [The Rust Performance Book](https://nnethercote.github.io/perf-book/profiling.html)
 - [Rust Existing C++](https://google.github.io/autocxx/cpp_types.html)
 - [Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)
-
+- [The Rust Rand Book](https://rust-random.github.io/book/guide-start.html)
 ## Must Read
 
 - [project about rocket written in Rust](https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)

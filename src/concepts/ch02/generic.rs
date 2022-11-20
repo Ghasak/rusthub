@@ -145,6 +145,8 @@ pub fn generic_function_example_03() {
 ///
 ///
 /// Description:
+/// If you didnt implment the `Display` above, you cannot use it here in the generic
+/// while the `Debug` trait is alreayd being used in the macro `Debug`.
 /// For current implementation, the `strcut` has no `dervie` for `Display` similar to `Debug`, so instead, we need to implment that manually.
 /// using:
 /// ```rust

@@ -15,15 +15,14 @@ use std::time::Duration;
 //use once_cell::sync::OnceCell;
 
 mod concepts;
+use self::concepts::ch01::enum_in_depth::enum_and_pattern_mathcing;
 use concepts::ch01::{
     common_collections, enum_in_depth, error_handling_in_depth, experimental_ideas,
     memeory_investigating, ownership_borrowing, struct_in_depth_2, structs_in_depth,
 };
-use concepts::create_text;
-
-use self::concepts::ch01::enum_in_depth::enum_and_pattern_mathcing;
-
 use concepts::ch02::generic;
+use concepts::create_text;
+use concepts::easy_rust::{self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts};
 //? Out main function
 ///
 //? # Main example library
@@ -53,6 +52,7 @@ fn main() {
     //experimental_ideas::over_write_console_output_enhanced();
     //experimental_ideas::another_multi_line_console_cursor_output();
     // experimental_ideas::executte_random_employee_generater();
+    // experimental_ideas::meaning_of_wrap_or();
     // enum_in_depth::enum_and_pattern_mathcing();
     // struct_in_depth_2::detecting_new_struct_initialization();
     //common_collections::hash_map();
@@ -64,13 +64,9 @@ fn main() {
     // generic::generic_function_example_02();
     // generic::generic_function_example_03();
     // generic::generic_function_example_04();
-
-    // fn return_ref(name : String) -> &'static str{
-    //     let country = "Japan";
-    //     let result = format!("{} added to {}", name, &country);
-    //
-    //     return &result
-    //
-    // }
-
+    // easy_rust007_debug_printing::easy_rust_007_debuging_prinitng();
+    // easy_rust008_mutability::eays_rust008_mutablility();
+    // easy_rust028_enums_all_parts::easy_rust_028_enums_part_1();
+    // easy_rust028_enums_all_parts::enum_with_data();
+    easy_rust028_enums_all_parts::another_form_of_enum();
 }

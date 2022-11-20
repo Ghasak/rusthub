@@ -11,7 +11,7 @@ strings should be same to produce the results you want.
 - exclusively we distinguish between the two types as `&str` is on `stack`
   while `String` (`new`) keyword means its on `heap`.
 
-## controlling memeory for variables
+## Controlling memeory for variables
 You can use `shadowing` which will allow you to keep same memory for a given
 variable without a need to create new variable. This is useful when you want to
 converate the same variable from one given type to another.
@@ -153,10 +153,6 @@ fn main() {
 }
 
 ```
-
-
-
-
 ## Concepts
 1.  Some()
 2.  panic()
