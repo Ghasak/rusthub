@@ -1,6 +1,5 @@
 // use std::io ;
 // use std::io::stdin;
-
 #![allow(clippy::assign_op_pattern)]
 #![allow(unused_imports)]
 #![allow(dead_code)]
@@ -22,7 +21,9 @@ use concepts::ch01::{
 };
 use concepts::ch02::generic;
 use concepts::create_text;
-use concepts::easy_rust::{self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts};
+use concepts::easy_rust::{
+    self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
+};
 //? Out main function
 ///
 //? # Main example library
@@ -68,5 +69,5 @@ fn main() {
     // easy_rust008_mutability::eays_rust008_mutablility();
     // easy_rust028_enums_all_parts::easy_rust_028_enums_part_1();
     // easy_rust028_enums_all_parts::enum_with_data();
-    easy_rust028_enums_all_parts::another_form_of_enum();
+    // easy_rust028_enums_all_parts::another_form_of_enum();
 }

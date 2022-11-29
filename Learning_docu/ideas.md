@@ -65,12 +65,12 @@ the `programming elements` declarations in them not the definitions.
 
 ## Things to do
 
-- [ ] Structure the information with references and examples for each
+- [x] Structure the information with references and examples for each
   programming language.
-- [ ] Implmenting the `rust` library that can see the files that the complier
+- [x] Implmenting the `rust` library that can see the files that the complier
   can see. (`check lets go rusty - modules and crates`)
-- [ ] implementing other programming language.
-- [ ] support the file naming system in `java` for example.
+- [x] implementing other programming language.
+- [x] support the file naming system in `java` for example.
 
 
 

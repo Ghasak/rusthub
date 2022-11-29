@@ -50,7 +50,7 @@ To see other features you can use `cargo modules generate tree  --help`.
 ```rust
 ╭─ gmbp   GMacBookPro on ~/Desktop/devCode/rust_fundamentals/rusthub   
 ├─ﮧ INSERT  17h52m|main !6 ?3
-╰─ cargo modules generate tree --with-types                                                                 祥:23ms  [   Nov 11, 2022 -  9:15:23 PM ]
+╰─ cargo modules generate tree --with-types
 
 crate rusthub
 ├── mod concepts: pub(crate)
@@ -87,6 +87,15 @@ not include the dependencies.
 cargo docu --no-deps --open
 ```
 
-
+## Auto Run Using Cargo
+You can use `cargo-watch` which will keep on running our project and working in background.
+- First install it on global `rust` at the `~/.cargo/` using:
+    ```rust
+    cargo install cargo-watch
+    ```
+- Open a new `termina` and run:
+    ```rust
+    cargo-watch -x run
+    ```
 
 

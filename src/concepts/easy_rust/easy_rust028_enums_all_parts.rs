@@ -17,6 +17,7 @@ pub fn easy_rust_028_enums_part_1() {
     // println!(
     //     "Value of our selected value in this enum is : {:#?} -> \n and the type is : {}",
     //     ThingsInTheSky::Sun,
+
     //     common_collections::type_of(ThingsInTheSky::Sun)
     // );
 
@@ -30,8 +31,6 @@ pub fn easy_rust_028_enums_part_1() {
     use crate::colored;
     use crate::concepts::my_emoji;
 
-    //extern crate colored; // not needed in Rust 2018+
-    use colored::*;
     fn check_skystate(state: &ThingsInTheSky) {
         match state {
             ThingsInTheSky::Sun => {
@@ -139,4 +138,37 @@ pub fn another_form_of_enum() {
         my_emoji("rocket"),
         happiness_level
     );
+
+    for i in 0..10 {
+        println!(
+            "[{}] out of 1 to 10, my happiness level is : {}",
+            my_emoji("rocket"),
+            happiness_level
+        );
+    }
+
+    for i in 0..10 {
+        println!(
+            "[{}] The current value you are asking about is given as ",
+            my_emoji("party_popper")
+        );
+    }
+    use colored::*;
+    for i in 0..100 {
+        let idx: String = format!("{}", i);
+        println!(
+            "[{}] whatyou can make with the following: -> {} ",
+            my_emoji("party_popper"),
+            idx.red()
+        );
+    }
+    #[derive(Debug)]
+    enum my_enum {
+        choice_1,
+        choice_2,
+        choice_3,
+        choice_4,
+        choice_5,
+    }
+
 }

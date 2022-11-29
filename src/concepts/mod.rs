@@ -9,8 +9,6 @@ pub mod easy_rust;
 
 use std::collections::{self, HashMap};
 
-
-
 /// Our Emoji Storage dictionary
 ///
 /// # Function to bring emoji by name,
@@ -20,8 +18,18 @@ use std::collections::{self, HashMap};
 /// - `String` icons, ownership released from the function, so can be used anyhere.
 /// ```shell
 ///     [🚀] current value is =>it is  1 !
-///     [🚀] current value is =>it is  2 !
+///     [🎉] current value is =>it is  2 !
 /// ```
+/// List of options:
+/// - rocket
+/// - sparkles
+/// - fire
+/// - party_popper
+/// - wrapped_gift
+/// - light_bulb
+/// - info, warn, error, trace, pass
+/// - robot, pass, exclamation_red, question_white, question_red,
+/// - exclamation_white,double_exclamation, exclamation_question
 pub fn my_emoji(icon_name: &str) -> String {
     let mut emoji_storage: HashMap<String, String> = HashMap::new();
     emoji_storage.insert(String::from("rocket"), String::from("🚀"));
@@ -42,8 +50,6 @@ pub fn my_emoji(icon_name: &str) -> String {
     emoji_storage.insert(String::from("question_red"), String::from("❓"));
     emoji_storage.insert(String::from("double_exclamation"), String::from("‼️ "));
     emoji_storage.insert(String::from("exclamation_question"), String::from("⁉️ "));
-
-
 
     let return_icon = emoji_storage.get(icon_name);
 

@@ -214,7 +214,10 @@ pub fn hash_map() {
     println!("Value of score for {} is -> {}", searching_key, score);
 
     // Hash Maps and OwnerShip
-    // For types that implemetn the `Copy` trait, like `i32`, the values are copied into the hash map. For owned vlaues like `String`, the values will be moved and the hash map will be the owner ofthose values, as demonstrted in the
+    // For types that implemetn the `Copy` trait, like `i32`, the values are
+    // copied into the hash map. For owned vlaues like `String`, the values will
+    // be moved and the hash map will be the owner ofthose values, as
+    // demonstrted in the
 
     let first_field = String::from("Favoriate color");
     let field_value = String::from("Blue");

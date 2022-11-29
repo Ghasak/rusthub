@@ -17,8 +17,8 @@
 - [Rust Existing C++](https://google.github.io/autocxx/cpp_types.html)
 - [Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 - [The Rust Rand Book](https://rust-random.github.io/book/guide-start.html)
-## Must Read
 
+## Must Read
 - [project about rocket written in Rust](https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)
 - [Rust cheatsheet](https://zerotomastery.io/cheatsheets/rust-cheat-sheet/)
 
