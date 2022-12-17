@@ -275,3 +275,25 @@ pub fn meaning_of_wrap_or() {
         );
     }
 }
+
+/// printing nicely with spaces
+///
+/// ## Using Println! macro with sapces
+///
+///
+/// ### Description:
+/// The following function will print with spaces in the println! macro,
+/// the syntax is like the str.formt synatx in python.
+pub fn pretty_print_fn() {
+    println!(
+        "{0: <10} | {1: <10} | {2: <10} | {3: <10}",
+        "total", "blanks", "comments", "code"
+    );
+    println!("{0: <10} | {1: <10} | {2: <10} | {3: <10}", 0, 0, 0, 0);
+    println!("{0: <10} | {1: <10} | {2: <10} | {3: <10}", 77, 0, 3, 74);
+    println!("{0: <10} | {1: <10} | {2: <10} | {3: <10}", 112, 0, 6, 106);
+    println!(
+        "{0: <10} | {1: <10} | {2: <10} | {3: <10}",
+        460, 0, 10, 1371
+    );
+}

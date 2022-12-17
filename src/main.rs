@@ -42,6 +42,9 @@ use colored::*;
 use concepts::my_emoji;
 /// ==========================================================================
 
+mod numerical_analysis;
+use numerical_analysis::ordinary_differential_equations;
+
 fn main() {
     // create_text();
     // ownership_borrowing::about_owner_ship_concepts();
@@ -53,11 +56,12 @@ fn main() {
     //experimental_ideas::over_write_console_output_enhanced();
     //experimental_ideas::another_multi_line_console_cursor_output();
     // experimental_ideas::executte_random_employee_generater();
-    // experimental_ideas::meaning_of_wrap_or();
+    //experimental_ideas::meaning_of_wrap_or();
+    //experimental_ideas::pretty_print_fn();
     // enum_in_depth::enum_and_pattern_mathcing();
-    // struct_in_depth_2::detecting_new_struct_initialization();
+    //struct_in_depth_2::detecting_new_struct_initialization();
     //common_collections::hash_map();
-    //error_handling_in_depth::error_handling_concept();
+    // error_handling_in_depth::error_handling_concept();
     // error_handling_in_depth::learning_about_error();
     //generic::learning_more_about_generics();
     // generic::working_with_generic();
@@ -67,7 +71,10 @@ fn main() {
     // generic::generic_function_example_04();
     // easy_rust007_debug_printing::easy_rust_007_debuging_prinitng();
     // easy_rust008_mutability::eays_rust008_mutablility();
-    // easy_rust028_enums_all_parts::easy_rust_028_enums_part_1();
+    //easy_rust028_enums_all_parts::easy_rust_028_enums_part_1();
     // easy_rust028_enums_all_parts::enum_with_data();
     // easy_rust028_enums_all_parts::another_form_of_enum();
+    // ordinary_differential_equations::runge_kutta::welcome();
+    ordinary_differential_equations::runge_kutta::basics_of_ndarray();
+
 }

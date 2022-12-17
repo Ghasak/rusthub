@@ -10,9 +10,9 @@ resources.
       `traits`.
 - [x]  Module and Crates for projects
     - including `super`, `self` and `crate` syntax
-- [ ] life-time
-
-
+- [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
+- [ ] Adding `JupyterNotebook` support for `Rust`,
+- [ ] Chaining methods, iterators and closures.
 ## How to use
 
 Run your main programming at root directory of crate using, to check the
@@ -97,5 +97,13 @@ You can use `cargo-watch` which will keep on running our project and working in 
     ```rust
     cargo-watch -x run
     ```
+- But, to push it further, we can clear the `console` as well, using
+    ```rust
+    cargo-watch -c -x run --quiet
 
+
+    ```
+
+## Libraries to be inlcuded
+1. [Neuronika Optim](https://docs.rs/neuronika/0.1.0/neuronika/optim/index.html)
 
