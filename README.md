@@ -13,6 +13,7 @@ resources.
 - [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
 - [ ] Adding `JupyterNotebook` support for `Rust`,
 - [ ] Chaining methods, iterators and closures.
+
 ## How to use
 
 Run your main programming at root directory of crate using, to check the

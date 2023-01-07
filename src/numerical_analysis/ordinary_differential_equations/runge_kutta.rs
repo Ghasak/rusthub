@@ -22,7 +22,7 @@ pub fn basics_of_ndarray() {
     let result_1 = dt * &arr1;
     // println!("{:#?}", result_1);
     //let result_2 = f64::powf(result_1, 2.0);
-    // let output: Vec<f64> = Vec::with_capacity(arr1.len());
+    // let output: Vec<f64> = Vec::with_capacity(arr1.len())
     // for item in output.iter(){
     //     println!("{:#?}", output);
     // }
@@ -36,7 +36,7 @@ pub fn basics_of_ndarray() {
     let c = a.clone().mapv_into(|v| f64::powf(v, 2.0));
 
     println!("{:#?}", a);
-    println!("\n ******", );
+    println!("\n ******",);
     println!("{:#?}", c);
 }
 
@@ -53,15 +53,14 @@ pub fn welcome() {
     const DT: f64 = 0.5;
     const DT_EXACT: f64 = 0.01;
 
-    fn f(t: f64, y: &Array1<f64>) -> Vec<f64> {
-        let mut y_result: Vec<f64> = vec![];
-        for item in y {
-            //let angle : f64 = f64::to_degrees(*item);
-            //let a = f64::powf(2.0, f64::sin(t)) * *item;
-            //let a = f64::powf(f64::sin(t),2.0);
-            let a = f64::sin(t).powf(2.0) * *item;
-            y_result.push(a);
-        }
-        y_result
-    }
+    // fn f(t: f64, y: &Array1<f64>) -> Vec<f64> {
+    //     let mut y_result: Vec<f64> = vec![];
+    //     for item in y {
+    //         //let angle : f64 = f64::to_degrees(*item);
+    //         //let a = f64::powf(2.0, f64::sin(t)) * *item;
+    //         //let a = f64::powf(f64::sin(t),2.0);
+    //         let a = f64::sin(t).powf(2.0) * *item;
+    //         y_result.push(a);
+    //     }
+    // }
 }

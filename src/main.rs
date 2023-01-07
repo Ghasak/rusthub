@@ -41,7 +41,6 @@ extern crate colored; // not needed in Rust 2018+
 use colored::*;
 use concepts::my_emoji;
 /// ==========================================================================
-
 mod numerical_analysis;
 use numerical_analysis::ordinary_differential_equations;
 
@@ -75,6 +74,8 @@ fn main() {
     // easy_rust028_enums_all_parts::enum_with_data();
     // easy_rust028_enums_all_parts::another_form_of_enum();
     // ordinary_differential_equations::runge_kutta::welcome();
-    ordinary_differential_equations::runge_kutta::basics_of_ndarray();
+    //ordinary_differential_equations::runge_kutta::basis_of_ndarray();
+    ordinary_differential_equations::runge_kutta::welcome();
+    //ordinary_differential_equations::runge_kutta::basics_of_ndarray();
 
 }
