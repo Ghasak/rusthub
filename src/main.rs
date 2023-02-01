@@ -75,7 +75,18 @@ fn main() {
     // easy_rust028_enums_all_parts::another_form_of_enum();
     // ordinary_differential_equations::runge_kutta::welcome();
     //ordinary_differential_equations::runge_kutta::basis_of_ndarray();
+    // ordinary_differential_equations::runge_kutta::welcome();
+    // ordinary_differential_equations::runge_kutta::basics_of_ndarray();
     ordinary_differential_equations::runge_kutta::welcome();
-    //ordinary_differential_equations::runge_kutta::basics_of_ndarray();
+    for i  in 0..=10  {
+        let item: String = format!("{i}");
+        println!("[{}] The {} of our current file is given as {} {}",my_emoji("rocket"), "Analysis Value".yellow() ,"->".blue(), item.red());
+
+    }
+
+    for item in 0..=10{
+        let item : String = format!("{item}");
+        println!("[{}] We obtian the value of i -> at -> {}",my_emoji("rocket"),  item.red() );
+    }
 
 }

@@ -1,6 +1,12 @@
 # rusthub
 Thoughts and ideas on Rust lang, Including insights from many references and
 resources.
+## Update - 2023-01-29 21:37
+- Using `Rustc --version` -> `rustc 1.67.0 (fc594f156 2023-01-24)`
+- Current version we are using, to update to stable
+    ```shell
+    rustup update stable
+    ```
 
 
 ## To do
@@ -13,6 +19,8 @@ resources.
 - [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
 - [ ] Adding `JupyterNotebook` support for `Rust`,
 - [ ] Chaining methods, iterators and closures.
+- [ ] Smar pointers and their usage
+- [ ] Multithreading and mult-processing
 
 ## How to use
 
