@@ -19,7 +19,7 @@ resources.
 - [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
 - [ ] Adding `JupyterNotebook` support for `Rust`,
 - [ ] Chaining methods, iterators and closures.
-- [ ] Smar pointers and their usage
+- [ ] Smart pointers and their usage
 - [ ] Multithreading and mult-processing
 
 ## How to use
