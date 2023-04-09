@@ -21,6 +21,7 @@ resources.
 - [ ] Chaining methods, iterators and closures.
 - [ ] Smart pointers and their usage
 - [ ] Multithreading and mult-processing
+- [ ] Concurrency in Rust and Server for microservice.
 
 ## How to use
 

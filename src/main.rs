@@ -20,10 +20,12 @@ use concepts::ch01::{
     memeory_investigating, ownership_borrowing, struct_in_depth_2, structs_in_depth,
 };
 use concepts::ch02::generic;
+use concepts::ch03::rust_ownership_and_borrowing;
 use concepts::create_text;
 use concepts::easy_rust::{
     self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
 };
+use concepts::playground::random_module;
 //? Out main function
 ///
 //? # Main example library
@@ -77,16 +79,11 @@ fn main() {
     //ordinary_differential_equations::runge_kutta::basis_of_ndarray();
     // ordinary_differential_equations::runge_kutta::welcome();
     // ordinary_differential_equations::runge_kutta::basics_of_ndarray();
-    ordinary_differential_equations::runge_kutta::welcome();
-    for i  in 0..=10  {
-        let item: String = format!("{i}");
-        println!("[{}] The {} of our current file is given as {} {}",my_emoji("rocket"), "Analysis Value".yellow() ,"->".blue(), item.red());
+    //ordinary_differential_equations::runge_kutta::welcome();
+    //rust_ownership_and_borrowing::random_function();
+    //random_module::random_stuff()
+    rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
 
-    }
 
-    for item in 0..=10{
-        let item : String = format!("{item}");
-        println!("[{}] We obtian the value of i -> at -> {}",my_emoji("rocket"),  item.red() );
-    }
 
 }
