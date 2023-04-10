@@ -26,6 +26,7 @@ use concepts::easy_rust::{
     self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
 };
 use concepts::playground::random_module;
+use concepts::playground::random_selection;
 //? Out main function
 ///
 //? # Main example library
@@ -82,6 +83,8 @@ fn main() {
     //ordinary_differential_equations::runge_kutta::welcome();
     //rust_ownership_and_borrowing::random_function();
     //random_module::random_stuff()
+    //rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
+    //random_selection::using_random_selection_fn();
     rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
 
 

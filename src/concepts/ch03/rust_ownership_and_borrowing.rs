@@ -1,23 +1,29 @@
+//use rand::prelude::*;
+use rand::Rng;
+use std::collections::HashMap;
 
-
-
-#[allow(unused_variables)]
-
-pub fn rust_owner_ship_and_borrowing_concept(){
-
-let stack_i8: i8 = 10;
-let stack_f32: f32 = 20.;
-let stack_bool: bool = true;
-let stack_char: char = 'a';
-
-
-let mut v :Vec<f32> = Vec::new();
-    for i in 1..10{
-        let k: f32 = i as f32;
-        v.push(k)
-    }
-    for item in v.iter(){
-        println!("{item}")
-    }
+#[derive(Debug)]
+struct my_struct {
+    a: i32,
+    b: f64,
+    c: String,
 }
 
+#[allow(unused_variables)]
+#[allow(unknown_lints)]
+#[allow(renamed_and_removed_lints)]
+#[allow(uninlined_format_args)]
+pub fn rust_owner_ship_and_borrowing_concept() {
+    let mut var_1 = my_struct { a: 9, b: 10.0 , c: "Wow".to_string()};
+    some_procedure(&mut var_1);
+    println!("{:#?}", var_1);
+}
+
+#[allow(unused_variables)]
+#[allow(unknown_lints)]
+#[allow(renamed_and_removed_lints)]
+#[allow(uninlined_format_args)]
+fn some_procedure(my_strctu_param: &mut my_struct) {
+    my_strctu_param.a = 155;
+    println!("{:?}", my_strctu_param)
+}

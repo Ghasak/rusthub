@@ -113,6 +113,8 @@ You can use `cargo-watch` which will keep on running our project and working in 
 
 
     ```
+### Using clippy linter
+- [All the Clippy Lints](https://rust-lang.github.io/rust-clippy/v0.0.212/index.html)
 
 ## Libraries to be inlcuded
 1. [Neuronika Optim](https://docs.rs/neuronika/0.1.0/neuronika/optim/index.html)
