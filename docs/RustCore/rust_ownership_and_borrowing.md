@@ -531,3 +531,66 @@ fn some_procedure(param_a: &mut my_struct) {
 - Mastery of Ownership and Borrowing will take time
     - Be patient :).
     - Stick with it.
+
+### Example - Ownership is not an issue for stack variables
+
+- In this code, you are not using any reference or borrowing. The some_int_var
+  is a simple integer variable, and when you pass it to the get_int_ref
+  function, the value is moved into the function and is no longer accessible in
+  the calling function. The get_int_ref function simply takes an i32 value as
+  input and returns it as output. Therefore, there is no ownership issue in
+  this code.
+- In the code you provided, some_int_var is not being borrowed by any
+  references or passed as an argument to the get_int_ref function. Therefore,
+  it is not being moved or borrowed, and the ownership remains with the scope
+  in which it was declared, which in this case is the function
+  life_time_concept_fn.
+- When you call the get_int_ref function with some_int_var as an argument, Rust
+  makes a copy of some_int_var and passes it to the function. The get_int_ref
+  function returns this copy, and the value of some_int_var is not affected.
+- The returned value is then assigned to new_varome_int_var, which becomes the
+  new owner of the value. When println!("{new_varome_int_var}"); is executed,
+  new_varome_int_var is printed. Finally, println!("{some_int_var}"); is
+  executed, and the value of some_int_var is printed without any issues since
+  it was not moved or borrowed.
+
+```rust
+pub fn life_time_concept_fn() {
+    let some_int_var : i32 = 10;
+    let new_varome_int_var = get_int_ref(some_int_var);
+    println!("{new_varome_int_var}");
+    println!("{some_int_var}");
+
+}
+
+fn get_int_ref(param_1: i32 )-> i32{
+        param_1
+}
+```
+- But, the code should not be compiled and I verified this with `Rust: v.1.5.8.0`. As we get an erro messge says
+```rust
+error[E0382]: use of moved value: `some_int_var`
+ --> src/main.rs:5:26
+  |
+3 |     let some_int_var: i32 = 10;
+  |         --------------- move occurs because `some_int_var` has type `i32`, which does not implement the `Copy` trait
+4 |     let new_var = get_int_var(some_int_var);
+  |                                   ---------- value moved here
+5 |     println!("{some_int_var}"); // This line causes a compilation error
+  |                          ^^^^^^^^^ value used here after move
+  |
+  = note: move occurs because `some_int_var` has type `i32`, which does not implement the `Copy` trait
+
+```
+
+- But, later, as I start using the complier `Rust: rustc 1.67.0 (fc594f156
+  2023-01-24)`, I start being able to complie, and the reason is:
+    - It seems that starting from Rust 1.45, the Copy trait is automatically
+      implemented for types that implement Clone, and i32 is one of these types.
+      Therefore, the code you provided earlier will compile without any issues on
+      Rust 1.67.0.
+- **Summary**,
+    - For stack variables, they are cheap, so the `clone/copy` is implemented
+      automatically. you will face this issue once you use the `heap` allocated
+      data types.
+

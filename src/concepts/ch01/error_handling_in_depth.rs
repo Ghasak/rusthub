@@ -1,6 +1,5 @@
 #![allow(unused_must_use)]
 pub fn error_handling_concept() {
-
     use std::fs::File;
     use std::io::ErrorKind;
 
@@ -83,12 +82,8 @@ pub fn learning_about_error() {
         let result = ultimate_answer_enhanced(i);
         if result.is_ok() {
             println!("We got the result => {:?} at {}", result, i);
-        }
-        else{
-            println!("Error Message written to -> {:?} at {}",result, i ) ;
+        } else {
+            println!("Error Message written to -> {:?} at {}", result, i);
         }
     }
 }
-
-
-
