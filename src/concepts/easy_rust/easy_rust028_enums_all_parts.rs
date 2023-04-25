@@ -1,13 +1,15 @@
 #![allow(clippy::let_and_return)]
-use colored::Colorize;
-
+use crate::colored;
+use crate::concepts::ch01::common_collections;
 use crate::concepts::ch01::experimental_ideas;
+use crate::concepts::my_emoji;
+use colored::Colorize;
+use colored::*;
 
 pub fn easy_rust_028_enums_part_1() {
     // sturct means AND something AND something ..etc.
     // Enum means OR soemthing, OR something, means only one choice at a time.
 
-    use crate::concepts::ch01::common_collections;
     #[derive(Debug)]
     enum ThingsInTheSky {
         Sun,
@@ -20,16 +22,13 @@ pub fn easy_rust_028_enums_part_1() {
 
     //     common_collections::type_of(ThingsInTheSky::Sun)
     // );
-
+    /// This is a greate function
     fn create_skystate(time: i32) -> ThingsInTheSky {
         match time {
             6..=18 => ThingsInTheSky::Sun,
             _ => ThingsInTheSky::Stars,
         }
     }
-
-    use crate::colored;
-    use crate::concepts::my_emoji;
 
     fn check_skystate(state: &ThingsInTheSky) {
         match state {
@@ -130,7 +129,6 @@ pub fn another_form_of_enum() {
         happiness_level
     }
 
-    use crate::concepts::my_emoji;
     let my_mood = Mood::NoteBad;
     let happiness_level = match_mood(&my_mood);
     println!(
@@ -153,7 +151,6 @@ pub fn another_form_of_enum() {
             my_emoji("party_popper")
         );
     }
-    use colored::*;
     for i in 0..100 {
         let idx: String = format!("{}", i);
         println!(
@@ -170,5 +167,4 @@ pub fn another_form_of_enum() {
         choice_4,
         choice_5,
     }
-
 }

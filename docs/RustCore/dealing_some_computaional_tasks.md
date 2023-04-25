@@ -1,3 +1,9 @@
+# Computational Tasks
+
+The following is for some computational taks that I need to deal with and to
+know more alternative for solving a given problem in `Rust`.
+
+```rust
 use std::io;
 /// # Demonstration Function
 /// ## Function Highlights
@@ -45,3 +51,4 @@ fn examine_function_3(param_ve: &Vec<f64>) -> [f64; 4] {
     }
     output_stack_vec
 }
+```

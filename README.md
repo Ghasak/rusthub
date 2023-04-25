@@ -1,4 +1,4 @@
-# rusthub
+# Rusthub
 
 Thoughts and ideas on Rust lang, Including insights from many references and
 resources.
@@ -69,7 +69,7 @@ crate rust_learning_hub
         └── mod ownership_borrowing: pub
 ```
 
-To see other features you can use `cargo modules generate tree  --help`.
+To see other features you can use `cargo modules generate tree --help`.
 
 - Now, lets even the `enum` `struct` ..etc using
 
@@ -132,9 +132,14 @@ You can use `cargo-watch` which will keep on running our project and working in 
 
   ```rust
   cargo-watch -c -x run --quiet
-
-
   ```
+
+- You can also use advanced `cargo watch` for example
+  - Check the flags in the cargo-watch command (e.g. -w is for watch a spefic directory).
+
+```shell
+cargo watch -q -c -w src/ -x 'test model_db_ -- --test-threads=1 --nocapture'
+```
 
 ### Using clippy linter
 

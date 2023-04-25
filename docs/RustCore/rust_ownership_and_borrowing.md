@@ -1,29 +1,30 @@
 # Rust OwnerShip and Borrowing
+
 The owenership and borrowing are why rust is rust.
+
 - Initially rurstrated both new and senior developers.
 - Memeory management.
-    - No garbage colection
-    - Developer manages memeory in code
-    - stack vs heap
+  - No garbage colection
+  - Developer manages memeory in code
+  - stack vs heap
 - benefit
-    - Runtime speed
-    - Parallel and concurrent processing
-    - Safety
-
+  - Runtime speed
+  - Parallel and concurrent processing
+  - Safety
 
 ## Comparing STACK VS HEAP OWNERSHIP
 
-| idx   | STACK                                                                                                  | HEAP                                                                              |
-| ----- | ------------------------------------                                                                   | --------------------------------                                                  |
-| 1     | Stack is allocate on stack memeory                                                                     | Heap allocated on HEAP memeory                                                    |
-| 2     | Easy to copy                                                                                           | Expensive to copy                                                                 |
-| 3     | Ownership is not necessary                                                                             | Ownership is necessary to be maintained                                           |
-| 4     | It will create copy when necessary, by default in rust complier, when there is a conflict in ownership | By default you must use reference or clone to aovid the conflict in the ownership |
-| 5     | For declare a stack variable: No need to define mutability, by default its already mutable             | For declar Heap variable: Need to define mutiability, by default, you must provide the keyword `mut`        |
-| 6     | Stack doesnt required to use (&) borrowing ownership, as its on by  default                            | Need to specify the borrowing (&)                                                 |
-
+| idx | STACK                                                                                                  | HEAP                                                                                                 |
+| --- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| 1   | Stack is allocate on stack memeory                                                                     | Heap allocated on HEAP memeory                                                                       |
+| 2   | Easy to copy                                                                                           | Expensive to copy                                                                                    |
+| 3   | Ownership is not necessary                                                                             | Ownership is necessary to be maintained                                                              |
+| 4   | It will create copy when necessary, by default in rust complier, when there is a conflict in ownership | By default you must use reference or clone to aovid the conflict in the ownership                    |
+| 5   | For declare a stack variable: No need to define mutability, by default its already mutable             | For declar Heap variable: Need to define mutiability, by default, you must provide the keyword `mut` |
+| 6   | Stack doesnt required to use (&) borrowing ownership, as its on by default                             | Need to specify the borrowing (&)                                                                    |
 
 ## Concept
+
 Assume we have the following example
 
 ```rust
@@ -32,7 +33,9 @@ let stack_f32: f32 = 20.;
 let stack_bool: bool = true;
 let stack_char: char = 'a';
 ```
+
 They will be allocated in the `stack` as:
+
 ```
 +---------------+
 |   stack_char  |
@@ -47,22 +50,25 @@ They will be allocated in the `stack` as:
 |   stack_i8    |
 +---------------+
 ```
+
 ## Generally speaking:
+
 - Every piece of data in memeory has an owner (stack or heap)
 - Heap allocated memeory is cleaned up automatically when the last 'owner' of
   the memeory goes out of scope.
 
 ## STACK
+
 - STACK Defintion
-    - Fast memeory creation  and retrieval .. speed , speed , speed!
-    - Memory is automatically recaptured by the program after variables go out of scope
-    - I sthe default in Rrust
-    - Fixed size variables .. Collections Cannot be stack based ( and String are a collection of u8 's')
+  - Fast memeory creation and retrieval .. speed , speed , speed!
+  - Memory is automatically recaptured by the program after variables go out of scope
+  - I sthe default in Rrust
+  - Fixed size variables .. Collections Cannot be stack based ( and String are a collection of u8 's')
 - Stack then,
-    - known, fixed size type in memeory
-    - No need to search, they stack on top of each others,
-    - very fast
-    - Once they cleaned they pop from top with the critera (`LIFO`), Last Inter First OUT.
+  - known, fixed size type in memeory
+  - No need to search, they stack on top of each others,
+  - very fast
+  - Once they cleaned they pop from top with the critera (`LIFO`), Last Inter First OUT.
 
 ```rust
 // STACK
@@ -74,12 +80,15 @@ let stack_vec: [&str; 4] = ["north", "south", "west", "east"];
 ```
 
 ## HEAP
+
 On Heap, we create the variables on the heap
+
 - Flexiablitiy.
 - Memeory that can grow in size (Vector, HashMap, String, .. etc. )
 - Runtime performance cost (speed)
 - Memeory that can live beyond the scope that created it.
 - Memory is automatically recaptured when the last OWNER goes out of scope.
+
 ```rust
 //HEAP
 let heap_vector: Vec<i8> = Vec::new();
@@ -87,6 +96,7 @@ let heap_string: String = String::from("Hello");
 let heap_i8 : Box<i8> = Box::new(10);
 let mut heap_bool: Box<bool> = Box::new(true);
 ```
+
 ### Example 1. Assume we create the following
 
 ```rust
@@ -94,19 +104,23 @@ let heap_i8 : Box<i8> = Box::new(10);
 let heap_i8_2 = heap_i8;
 println!("{}", heap_i8);
 ```
+
 #### How it works
+
 1. The `heap_i8` is the owner of the data (10) allocated on the heap
 2. We transfered the ownership from `heap_i8` to a new variable called
    `heap_i8_2`.
 3. Since you cannot have two owners for same data allocation, rust complier
    will drop the variable `heap_i8` and its got cleaned in memeory.
 4. Therefore, the above will produce an error `borrow of moved value: heap_i8
-   value borrowed herre after move`.
+value borrowed herre after move`.
 
 #### Why?
+
 This is in stark contrast to most other languages. Most languages will simply
 have two variables pointing to the same allocated heap memory. And, when they
 do they open up a Pandora's box issues which we'll disucss later.but mainly we can say:
+
 - Other langauges: two varaibles can point to the same memeory, making parallel
   adn concurrency issues such as `race condition` hard to be tackled.
 - **Notice** that we have this issue only on `HEAP` not on `STACk`, because on
@@ -114,19 +128,24 @@ do they open up a Pandora's box issues which we'll disucss later.but mainly we c
   automatically.
 
 #### How you can solve this?
+
 There are several ways to resolve the borrowing and moving issue above.
 
 1. Don't use this variable `heap_i8`.
 2. Borrow the ownership
+
 - using the (`&`) to borrow the ownership from the variable, and retrun the
   ownership to the original variable once the variable that borrowed the
   ownership goes oout of the scope.
+
 3. Create a clone:
-- This will create a new heap allocated variable, but, this  will be tedious as
+
+- This will create a new heap allocated variable, but, this will be tedious as
   we need to clone every variable to avoide the ownership.
 - `Cloning` is relatively expensive on the heap, and using reference instead is
   our best alternative.
 - We will write:
+
 ```rust
 let heap_i8 : Box<i8> = Box::new(10);
 //-- > let heap_i8_2 = heap_i8;
@@ -135,17 +154,21 @@ println!("{}", heap_i8);
 ```
 
 ### Example 2. Borrowing with Procedure
+
 #### ON STACK
+
 Borrowing with procdure (method or functions), is same, the ownership will be
 passed from the original variables to the params of the procedure signture (the
 procedure parameters). This point was not clear before for me.
 
 **Reminder**:
+
 - A parameter is the variable listed inside the parentheses in the function
   definition. An argument is the value that is sent to the function when it is
   called., so in the following example argument is the `stack_f64`.
 
 ##### How it works
+
 1. We created a stack argument with value of `1.0`.
 2. Then, we created the `stack_procedure` to perform some computational task.
 3. The stack procedure parameter namely `param`, will take the ownership of the stack,
@@ -174,17 +197,19 @@ fn stack_procedure(mut param: f64) {
 //In stack_procedure with param: 2
 //Original value on stack = 1
 ```
+
 #### ON HEAP
+
 Now, we will run into an issue of the `borrowing`, As we mentioned before, the
 ownership is related to heap allocation not stack allocation.
 
 ##### How it works
+
 1. We did exactly similar to the example above. The Ownership of memeory
    associated with `heap_f64`a gets transferred to `param`.
 2. Notice,that the param is now the owner, and we have passed the argument
    `heap_i8` which is now no logner available, (there will be only one owner at
    a time).
-
 
 ```rust
 fn main(){
@@ -198,9 +223,11 @@ fn heap_procdure(param: Box(f64))
     println!("{param}",);
 }
 ```
+
 ##### Solutions
+
 1. Now, we can use either `clone`.
-But, this is so expensive, imagine you have a vector of 1 million records, and clone this vector is inefficient.
+   But, this is so expensive, imagine you have a vector of 1 million records, and clone this vector is inefficient.
 
 ```rust
 
@@ -215,16 +242,18 @@ fn heap_procdure(param: Box(f64))
     println!("{param}",);
 }
 ```
+
 2. Pass back the ownership from the procedure to the original variable. (Also, its shadowing)
+
 - This works but
-   tedious as we need to manage the return,  what if we have several
-   parameters? basically the solution here is just to make us understand the
-   ownership.
-    - Notice, we pass the ownership from the `heap_f64` to the param at first
-      (signture of the heap_procdure).
-    - Then, we allow to return same parameter in our `heap_procedure` but including
-      the variable at the end without a `;`.
-    - Then, when we call the procedure, we pass it back to the argument `heap_f64`.
+  tedious as we need to manage the return, what if we have several
+  parameters? basically the solution here is just to make us understand the
+  ownership.
+  - Notice, we pass the ownership from the `heap_f64` to the param at first
+    (signture of the heap_procdure).
+  - Then, we allow to return same parameter in our `heap_procedure` but including
+    the variable at the end without a `;`.
+  - Then, when we call the procedure, we pass it back to the argument `heap_f64`.
 
 ```rust
 
@@ -240,6 +269,7 @@ fn heap_procdure(param: Box<f64>) -> Box<f64> {
 }
 
 ```
+
 - The benefit, it is not using cloning, but hard and not easily to be
   maintained, when you have so many param in the signture, see below
 
@@ -260,7 +290,9 @@ fn heap_procdure(param: Box<f64>, param_b: Box<bool>) -> (Box<f64> ,Box<bool>){
 ```
 
 3. [Most efficent way] Using reference `&`
+
 - We can use the reference,
+
 ```rust
 fn main(){
     // HEAP
@@ -284,6 +316,7 @@ where
 ```
 
 ### What is Borrow? and Move?
+
 - `Borrow` means using reference, `&` for any param when is created, it can
   borrow ownership from original argument, then return it after it goes out of
   the scope to the original argument.
@@ -292,10 +325,12 @@ where
   moved, the original argument will be cleared from memeory as its not allowed
   to have several owners to same piece of data.
 
-
 ## String and String Slices
+
 Similarly, we have also to think of the `String` as it is allocated on Heap,
+
 ### String Slices
+
 - String slicies is a pointer .. to either stack or heap. It is not allocated
   on `stack` or `heap` but it borrow the ownership of a memeory allocated of
   someone elses. Thats why you see `&` in the slice.
@@ -323,18 +358,21 @@ fn some_procedure(string_slice: &str, string_heap: &String){
 
 ```
 
-
 ## Ownership with mutiability
+
 As we stated, we can for heap data have only one owner at a time for same data.
 We can have multiple references at a time, but with two conditions.
+
 - The original argument must be immutable (doesnt change).
 - True owner in the example below is always `var_a` while `var_b` and `var_c` are both just references.
+
 ```rust
 let var_a = String::from("Howday!");
 let var_b = &var_a;
 let var_c = &var_a;
 println!("{var_a} {var_b} {var_c}");
 ```
+
 - The Rust complier assumes that the `var_a`, will not change down stream,
   hence, it doesn't care that assign many references for different variables
   like `var_b` and `var_c`.
@@ -349,6 +387,7 @@ let var_c = &var_a;
 var_a.push('a');
 println!("{var_a} {var_b} {var_c}");
 ```
+
 - but, if you use the references before we alter, it passes, and no complier
   error as shown below, as the jop is ended prior to the mutation.
 
@@ -359,7 +398,9 @@ let var_c = &var_a;
 println!("{var_a} {var_b} {var_c}");
 var_a.push('a');
 ```
+
 - Or if you also altered the heap data before creating the references. it passes.
+
 ```rust
 let mut var_a = String::from("Howday!");
 var_a.push('a');
@@ -367,6 +408,7 @@ let var_b = &var_a;
 let var_c = &var_a;
 println!("{var_a} {var_b} {var_c}");
 ```
+
 - In summary, either, you manage the mutiability, while creating the references, or use `clone` when it is needed.
 
 ```rust
@@ -401,6 +443,7 @@ fn heavy_calc(param: Vec<&str>) -> f64{
   - Possible answer, the potential strcut can have thousands of fields, and assume copy by default is for performance issue.
   - It is more logical to assume the creator of Rust, enforce the developer to implement the clone or copy by themselves.
 - Similary, we use the `&` to allow the struct to be referenced.
+
 ```rust
 
 #[derive(Debug)]
@@ -423,6 +466,7 @@ fn some_procedure(param_a: &my_struct) {
     println!("{:?}", param_a)
 }
 ```
+
 - If you still, want to implement the `copy`/`clone` you can use, then you
   don't need reference anymore. Notice, that the `tarit` `copy` is the one that
   replace the necessaty of using .clone() method when using the strct in the
@@ -450,7 +494,9 @@ fn some_procedure(param_a: my_struct) {
     println!("{:?}", param_a)
 }
 ```
+
 - You can also use the `clone` implementation manually as following
+
 ```rust
 #[derive(Debug)]
 struct my_struct {
@@ -477,6 +523,7 @@ fn some_procedure(param_a: my_struct) {
     println!("{:?}", param_a)
 }
 ```
+
 - Not all strcuts are able to have copy trait, such as
 
 ```rust
@@ -502,6 +549,7 @@ fn some_procedure(param_a: my_struct) {
 }
 
 ```
+
 - Finally, mutiability with strcut while considering ownership
 
 ```rust
@@ -523,14 +571,16 @@ fn some_procedure(param_a: &mut my_struct) {
     println!("{:?}", param_a)
 }
 ```
+
 ## RUST OWNERSHIP AND BORROWING
+
 - Why is this necessary?
-    - Eliminates memeory issues (null pointers, dangling pointers, data races ..etc.)
-    - Eliminates the Garbagge Collector.
-    - Parallel processing is a breeze!
+  - Eliminates memeory issues (null pointers, dangling pointers, data races ..etc.)
+  - Eliminates the Garbagge Collector.
+  - Parallel processing is a breeze!
 - Mastery of Ownership and Borrowing will take time
-    - Be patient :).
-    - Stick with it.
+  - Be patient :).
+  - Stick with it.
 
 ### Example - Ownership is not an issue for stack variables
 
@@ -567,7 +617,9 @@ fn get_int_ref(param_1: i32 )-> i32{
         param_1
 }
 ```
+
 - But, the code should not be compiled and I verified this with `Rust: v.1.5.8.0`. As we get an erro messge says
+
 ```rust
 error[E0382]: use of moved value: `some_int_var`
  --> src/main.rs:5:26
@@ -584,13 +636,38 @@ error[E0382]: use of moved value: `some_int_var`
 ```
 
 - But, later, as I start using the complier `Rust: rustc 1.67.0 (fc594f156
-  2023-01-24)`, I start being able to complie, and the reason is:
-    - It seems that starting from Rust 1.45, the Copy trait is automatically
-      implemented for types that implement Clone, and i32 is one of these types.
-      Therefore, the code you provided earlier will compile without any issues on
-      Rust 1.67.0.
+2023-01-24)`, I start being able to complie, and the reason is:
+  - It seems that starting from Rust 1.45, the Copy trait is automatically
+    implemented for types that implement Clone, and i32 is one of these types.
+    Therefore, the code you provided earlier will compile without any issues on
+    Rust 1.67.0.
 - **Summary**,
-    - For stack variables, they are cheap, so the `clone/copy` is implemented
-      automatically. you will face this issue once you use the `heap` allocated
-      data types.
+  - For stack variables, they are cheap, so the `clone/copy` is implemented
+    automatically. you will face this issue once you use the `heap` allocated
+    data types.
 
+### Example - Usage of the Heap alloction in developement
+
+The followign piece of code, is written for demostration only, it meant only to
+deepen our understandign to the `ownership`.
+
+```rust
+fn main(){
+    let p1 = 1f64;
+    let p2 = 2f64;
+    let output: Result<f64, String> = working_style(p1, p2);
+    println!("{output:#?}");
+    }
+
+
+fn working_style(mut a: f64, mut b: f64) -> Result<f64, String> {
+    a = a + 0.001;
+    b = b + 0.001;
+    let c: f64 = a + b;
+    if c < 10.0 {
+        Ok(c)
+    } else {
+        Err("This is not acceptable, c > 10 ".to_owned())
+    }
+}
+```

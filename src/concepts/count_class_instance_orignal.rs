@@ -12,8 +12,8 @@ lazy_static = "0.2.1"
 extern crate lazy_static;
 
 mod entity {
-    use std::sync::{Arc, Weak, Mutex};
     use std::sync::atomic;
+    use std::sync::{Arc, Mutex, Weak};
 
     pub struct Entity {
         pub name: String,
@@ -22,9 +22,7 @@ mod entity {
     impl Entity {
         pub fn new(name: String) -> Arc<Self> {
             println!("Entity named {} was made.", name);
-            let ent = Arc::new(Entity {
-                name
-            });
+            let ent = Arc::new(Entity { name });
             bump_counter();
             remember_instance(ent.clone());
             ent
@@ -68,7 +66,8 @@ mod entity {
         let entity: Weak<Entity> = Arc::downgrade(&entity);
         INSTANCES
             // Lock mutex
-            .lock().expect("INSTANCES mutex was poisoned")
+            .lock()
+            .expect("INSTANCES mutex was poisoned")
             // Push entity
             .push(entity);
     }
@@ -80,7 +79,8 @@ mod entity {
         */
         INSTANCES
             // Lock mutex
-            .lock().expect("INSTANCES mutex was poisoned")
+            .lock()
+            .expect("INSTANCES mutex was poisoned")
             // Get a borrowing iterator from the Vec.
             .iter()
             /*
