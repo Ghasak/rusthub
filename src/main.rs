@@ -20,7 +20,10 @@ use concepts::ch01::{
     memeory_investigating, ownership_borrowing, struct_in_depth_2, structs_in_depth,
 };
 use concepts::ch02::generic;
-use concepts::ch03::{enum_option_in_depth, life_time_concept, rust_ownership_and_borrowing};
+use concepts::ch03::{
+    enum_option_in_depth, life_time_concept, rust_ownership_and_borrowing,
+    structs_traits_and_implementation,
+};
 use concepts::create_text;
 use concepts::easy_rust::{
     self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
@@ -87,5 +90,6 @@ fn main() {
     //random_selection::using_random_selection_fn();
     //rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
     //enum_option_in_depth::option_enum_concept_fn();
-    life_time_concept::life_time_concept_fn();
+    //life_time_concept::life_time_concept_fn();
+    structs_traits_and_implementation::rust_structs_traits_and_implementation_fn();
 }

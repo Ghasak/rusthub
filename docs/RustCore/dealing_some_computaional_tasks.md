@@ -52,3 +52,78 @@ fn examine_function_3(param_ve: &Vec<f64>) -> [f64; 4] {
     output_stack_vec
 }
 ```
+
+---
+
+### Example, Creative with &str - related to lifetime
+
+- Take two &str and return which one is larger if parsing possible
+
+```rust
+
+fn main(){
+    let s1: &str = "10";
+    let s2: &str = "20";
+    let output = get_str_re(s1, s2);
+    println!("{output:#?}")
+    }
+
+fn get_str_re<'a>(param_1: &'a str, param_2: &'a str) -> Option<&'a str> {
+    match (param_1.parse::<i32>(), param_2.parse::<i32>()) {
+        (Ok(param_1_int), Ok(param_2_int)) => Some(if param_1_int > param_2_int {
+            param_1
+        } else {
+            param_2
+        }),
+        _ => None,
+    }
+}
+```
+
+### Rule - About static
+
+- You cannot use static MY_VECT: Vec<f63> = vec![1.2, 32.34]; because a
+  Vec<f64> is a dynamically-sized type, and its size is not known at
+  compile-time. The static keyword can only be used to declare static variables
+  with a fixed size and a 'static lifetime.
+
+  ```rust
+    static MY_VECT: &[f64] = &[1.2, 32.34];
+  ```
+
+- But, later I got, previously stated that this was not possible because
+  Vec<f64> is a dynamically-sized type, and therefore not suitable for use with
+  the static keyword. However, this statement was incorrect, as Rust does allow
+  the definition of static variables with dynamically-sized types under certain
+  conditions. Specifically, a Vec<T> can be used as the type of a static
+  variable if it is initialized with a constant expression, as is the case in
+  the example above.
+
+  ```rust
+    // -------- THIS WILL NOT COMPILE --------
+    fn test_3<'a>(param_1: &'static Vec<f64>) -> &'static Vec<f64> {
+        param_1
+    }
+
+    fn main() {
+        static MY_VECT: Vec<f64> = vec![1.2, 32.34];
+        let my_ref = test_3(&MY_VECT);
+        println!("{:?}", my_ref);
+    }
+
+  ```
+
+- After, digging inside, we found, the first arguemnt is correct,
+
+  ```rust
+  fn main(){
+
+    static MY_VECT: &[f64] = &[1.2, 32.344];
+    test_3(&MY_VECT);
+      }
+
+    fn test_3(param_1: &'static &[f64]) -> &'static [f64] {
+        param_1
+    }
+  ```
+

@@ -105,9 +105,12 @@ fn get_int_ref(param_1: &i32)-> &i32{
 ```
 
 - Notice, that we don't have an issue with the function `get_int_ref` why?
-- Rust can guarantee that the return reference will live long enough ifor downstream code to properly use it.
-- Scope PROVIDING the reference is the same exact scope that will be RECEIVEING the result output.
-- Meaning, that `param_1` reference scope is same as the return scope annotated with `-> &i32`.
+- Rust can guarantee that the return reference will live long enough ifor
+  downstream code to properly use it.
+- Scope PROVIDING the reference is the same exact scope that will be RECEIVEING
+  the result output.
+- Meaning, that `param_1` reference scope is same as the return scope annotated
+  with `-> &i32`.
 
 ### Example -3
 
@@ -138,10 +141,10 @@ fn get_int_ref<'a>(param_1: &'a i32)-> &'a i32{
 ```
 
 - You will get a complier error says `cannot find the value result_ref in this scope not found in this scope.`
-- This means that `result_ref` is only valid within the inner block and does not
-  exist outside of it. Therefore, when you try to print `result_ref` outside of
-  the inner block using `println!("{result_ref}");`, the Rust compiler cannot
-  find it in the current scope and throws an error.
+- This means that `result_ref` is only valid within the inner block and does
+  not exist outside of it. Therefore, when you try to print `result_ref`
+  outside of the inner block using `println!("{result_ref}");`, the Rust
+  compiler cannot find it in the current scope and throws an error.
 - [**OPENAI-CHATGPT**] Rustlife time for reference is for specify how long the
   reference should live but not enforce it? right?
 
@@ -156,9 +159,9 @@ fn get_int_ref<'a>(param_1: &'a i32)-> &'a i32{
     and best practices for working with Rust lifetimes. Here are a few links
     that you may find helpful:
     - The Rust Programming Language book:
-      https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
-    - Rust by Example: https://doc.rust-lang.org/stable/rust-by-example/scope/lifetime.html
-    - Rustonomicon: https://doc.rust-lang.org/nomicon/lifetimes.html
+      - [Rust language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+      - [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/scope/lifetime.html)
+      - [Rustonomicon](https://doc.rust-lang.org/nomicon/lifetimes.html)
 
 - To fix the compliation error you can use
 
@@ -323,7 +326,8 @@ fn obvious_solution(param_a: &str, param_b: &str) -> String {
 
 No, there is no way to concatenate two &str references directly in Rust. The
 &str type is an immutable borrowed reference to a string, and the + operator is
-not defined for it because it requires ownership of the operands. However, we can use the following way.
+not defined for it because it requires ownership of the operands. However, we
+can use the following way.
 
 ```rust
 fn main(){
@@ -668,13 +672,13 @@ fn main(){
     println!("{}", result_ref)
 
     }
-fn get_int_ref<'a, 'b>(param_1: &'a i32, param_2:&'b i32) -> &'a i32 {
+fn get_int_ref<'a, 'b>(param_1: &'a i32, param_2: &'b i32) -> &'a i32 {
     if param_1 > param_2 {
         param_1
-        }
-        else{
-                param_2
-            }
+    } else {
+        param_2
+    }
+}
 }
 // We get compliter error says
 // lifetime may note live long enough consider adding the following bound: `'b: 'a`
@@ -713,14 +717,13 @@ fn get_int_ref<'a>(param_1: &'a i32, param_2:&'a i32) -> &'a i32 {
   `lifetime 'static required rustc (E0621)` `lifetime static required`.
 
 ```rust
-fn get_str_re(param_1: &str, param_2:&str) -> &str{
-        if param_1 > param_2 {
-                param_1
-            }else{
-                    param_2
-                }
+fn get_str_re(param_1: &str, param_2: &str) -> &str {
+    if param_1 > param_2 {
+        param_1
+    } else {
+        param_2
     }
-
+}
 ```
 
 - The solution of `lifetime` specifier is created to eliminate the potential
@@ -732,14 +735,13 @@ fn get_str_re(param_1: &str, param_2:&str) -> &str{
   be done with it.
 
 ```rust
-fn get_str_re<'a>(param_1: &'a str, param_2:&'a str) -> &'a str{
-        if param_1 > param_2 {
-                param_1
-            }else{
-                    param_2
-                }
+fn get_str_re<'a>(param_1: &'a str, param_2: &'a str) -> &'a str {
+    if param_1 > param_2 {
+        param_1
+    } else {
+        param_2
     }
-
+}
 ```
 
 - So, you might be wondering why `Rrust` doesn't automatically assign the same
@@ -804,7 +806,8 @@ fn test_2(param_1: Vec<f64>) -> &Vec<f64>{
 ```rust
 #[allow(dead_code)]
 fn test_3<'a>(param_1: Vec<f64>) -> &'a Vec<f64> {
-    &param_1  \\<- here will be dropped the param_1 as its ownwership transfered to the function test_3,
+ // here will be dropped the param_1 as its ownwership transfered to the function test_3,
+    &param_1
 }
 ```
 
@@ -824,7 +827,10 @@ fn test_3<'a>(param_1: &'a Vec<f64>) -> &'a Vec<f64>{
 
     }
 ```
-- Now, lets create more complicated example, but should be same. The following example, shows that we will get a compile errors.
+
+- Now, lets create more complicated example, but should be same. The following
+  example, shows that we will get a compile errors. The complier sees two
+  parameters as references `paramp_2` and `param_3`
 
 ```rust
 fn main(){
@@ -833,80 +839,372 @@ fn main(){
 
 #[allow(dead_code)]
 fn test_4(param_1: i32, param_2: &str, param_3:&str, param_4: f64)-> &str{
+    if param_1 == 7 && param_4 > 10. {
+                param_2
+        }else{
+                param_3
+            }
 
     }
 ```
 
+- So we create two lifetime placeholders (usually these are in background), It
+  will apply `lifetime a` to `param_2` and apply `lifetime b` to `param_3`. If
+  we have third parameter as a reference it would create a lifetime `lifetime 'c` and apply it to that and so on and so forth. For the output it doesn't
+  know what the heck it wants to do with that, so we'll leave it for now. This
+  is what the complier believes your intention to be. Vast majority of the
+  cases you will say, we don't need to support different lifetimes for
+  different parameters.
 
--------------------------------------------------------------------------
-### Example, Creative with &str
+```rust
+fn test_4<'a, 'b>(param_1: i32, param_2: &'a str, param_3:&'b str, param_4: f64)-> &str{
+```
 
-- Take two &str and return which one is larger if parsing possible
+- In that case, I'm gonna explicitly define a single lifetime and apply it to
+  everything, this is what you as the developer would have written to force the
+  lifetimes to be the same. Rust just had some edge cases that you may not have
+  intended and realized there'd be a problem henece the complier error.
+  Therefore, you just need to step in and say I only want to support the same
+  lifetime or whateveer lifetimes fits our needs. Everytime a reference
+  parameters that didn't have a chance of being returned then I'd be ok to not
+  putting in a lifetime specifier on them, it's okay that they would have their
+  own lifetime and the default that Rust provided will be just fine, In this
+  example all the input reference parameters have the chance of being returned
+  and that's why we have explicitly forced the lifetime to be the same. Rust
+  will ensure that whatever your scheme memory issues won't occur. **rule-2:
+  Any reference parameter that is NEVER returned as the output, the Rust
+  provided default
+  lifetime is fine**.
+
+```rust
+fn test_4<'a>(param_1: i32, param_2: &'a str, param_3:&'a str, param_4: f64)-> &'a str{
+```
+
+- There is special case that the `Rust` will handle automatically and that's if
+  you have a single input reference and an output reference.You still could
+  have more non reference inputs and this would still apply. It doesn't really
+  matter what you would do in the body so I'll just return pram a `Rust` still
+  applies lifetimes to the parameters like it did before but if you have only
+  one input reference it will enforce the output reference to have the same
+  lifetime.
+
+```rust
+#[allow(dead_code)]
+fn test_2(param_1: &str) -> &str{
+        param_1
+    }
+```
+
+- There's no confusion into the siutation, so you would never have to
+  explicitly define lifetimes here `Rust` as shown below. `Rust` can safely
+  assume this is what your intention was.
+
+```rust
+#[allow(dead_code)]
+fn test_2<'a>(param_1: &'a str) -> &'astr{
+        param_1
+    }
+```
+
+- Let's clean up to explore vectors. I'll create a function that takes in a
+  vector slice reference or array reference. we will return a `slice` of this
+  array. Lets call also the function in the main by creating an a vector and
+  pass it to our function. [**Read Slice &[i32] as a reference vs
+  &Vec?**](../questions.md).
+
+```rust
+fn main(){
+    let a: Vec<i32> = vec![1,2,3,4,5];
+    let result = get_vec_slice(&a);
+    println!("{result:#?}")
+
+    }
+fn get_vec_slice(param_1: &[i32]) -> &[i32]{
+        &param_1[0..2]
+    }
+```
+
+- We are not return the full vector, instead we return a slice which is
+  perfectly legitimate if the entir vector has a certain lifetime, then all its
+  elements have that same lifetime, even though you're only returning a subset
+  or slice, Rust will compile just fine.
+- Let's augment our function by adding more referenc of the same type. Put some
+  logic in the function body.
+
+```rust
+fn main(){
+    let a: Vec<i32> = vec![1,2,3,4,5];
+    let result = get_vec_slice(&a);
+    println!("{result:#?}")
+
+    }
+fn get_vec_slice(param_1: &[i32], param_2: &[i32]) -> &[i32]{
+    if  param_1.len() > param_2.len(){
+        &param_1[0..2]
+        }else{
+        &param_2[0..2]
+            }
+    }
+```
+
+- You can see the complier cannot determine what the lifetime should be it's
+  current assuming program one has one lifetime (i.e. is it 'a or 'b should be
+  returned?). What the output lifetime? We need to make the `lifetime` similar
+  as we did before. Do we really want `param_1` and `param_2` to have different
+  `lifetime`? let's tell teh complier is not really necessary to support to do
+  is call the function with valid data and we're off to the races.
 
 ```rust
 
+fn get_vec_slice<'a>(param_1: &'a[i32], param_2: &'a[i32]) -> &'a[i32]{
+    if  param_1.len() > param_2.len(){
+        &param_1[0..2]
+        }else{
+        &param_2[0..2]
+            }
+    }
+```
+
+- We did this for `Vector` in both of their types on `stack` and on `heap`. As
+  a reminder, strings are just a vectors of `u8` data type. So the same concept
+  applies. String parsing is often where people run into issue with lifetimes,
+  but now we know better.
+
+```rust
 fn main(){
-    let s1: &str = "10";
-    let s2: &str = "20";
-    let output = get_str_re(s1, s2);
-    println!("{output:#?}")
+    let s: &str = "This is my given function";
+    let o = get_string_slice(s);
+    println!("{o:#?}")
     }
 
-fn get_str_re<'a>(param_1: &'a str, param_2: &'a str) -> Option<&'a str> {
-    match (param_1.parse::<i32>(), param_2.parse::<i32>()) {
-        (Ok(param_1_int), Ok(param_2_int)) => Some(if param_1_int > param_2_int {
-            param_1
-        } else {
-            param_2
-        }),
-        _ => None,
+fn get_string_slice(param_1: &str) -> &str {
+    let k: usize = param_1.len();
+    if k > 2 {
+        let half: usize = k / 2;
+        &param_1[0..half]
+    } else if k == 1 {
+        &param_1[0..1]
+    } else {
+        param_1
     }
 }
 ```
 
-### Rule - About static
+- Now, we will talk about the `static` lifetime. `static`: means lifetime that
+  lasts the entire program. `Constant` are static by their nature. You can also
+  have a static variables (by using the static keyword, but they will behave
+  the same). We will create some constants and a function that return a static
+  variable. `Rust` reserved the lifetime notation of apostrophe static, you
+  don't need to define it in angular brackets like you would for apostrophe. It
+  just part of the language. That's the exception that a reference output needs to
 
-- You cannot use static MY_VECT: Vec<f63> = vec![1.2, 32.34]; because a
-  Vec<f64> is a dynamically-sized type, and its size is not known at
-  compile-time. The static keyword can only be used to declare static variables
-  with a fixed size and a 'static lifetime.
+```rust
+const SOME_CONST_A : &str = "I'm a constant!";
+const SOME_CONST_B : &str = "I'm a constant, too!";
 
-  ```rust
-    static MY_VECT: &[f64] = &[1.2, 32.34];
-  ```
+fn main(){
+    let output:&str = some_func();
+    println!("{output:#?}")
+    }
 
-- But, later I got, previously stated that this was not possible because
-  Vec<f64> is a dynamically-sized type, and therefore not suitable for use with
-  the static keyword. However, this statement was incorrect, as Rust does allow
-  the definition of static variables with dynamically-sized types under certain
-  conditions. Specifically, a Vec<T> can be used as the type of a static
-  variable if it is initialized with a constant expression, as is the case in
-  the example above.
 
-  ```rust
-    // -------- THIS WILL NOT COMPILE --------
-    fn test_3<'a>(param_1: &'static Vec<f64>) -> &'static Vec<f64> {
+fn some_func() -> &'static str{
+    SOME_CONST_A
+    }
+```
+
+- It is not limited to the `output` only, we can have a static input parameter
+  as well.
+
+```rust
+
+fn some_func(param_1: &'static str, param_2: &'static str) -> &'static str {
+    if param_1.len() > param_2.len() {
+        SOME_CONST_A
+    } else {
+        SOME_CONST_B
+    }
+}
+
+```
+
+- You can also return a reference, sinc the const will never die, we don't do
+  that and its fine to pass the ownership for each to their param_1 and
+  param_2.
+
+```rust
+let output: &str = some_func(&SOME_CONST_A, &SOME_CONST_B);
+```
+
+- Defining a function with `'static` lifetime, means, all the passed parameters
+  has to live the entir of program. This assumption is very restricts, instead
+  we can use identical lifetime `'a` which will work fine for any case
+  scenario.
+
+```rust
+fn some_func(param_1: &'static str, param_2: &'static str) -> &'static str {
+//change to
+fn some_func<'a>(param_1: &'a str, param_2: &'a str) -> &'a str {
+// Now even when you pass another variable that is not 'static
+let var = String::from("variable passed");
+// this was not allowed as var has less lifetime and not static.
+```
+
+- Let's talk now about `lifetime` with `Generic`. We will use PartialOrd so
+  that we caaan compare if `T` items are greater or smaller than other `T`
+  items.
+
+```rust
+fn get_smaller<T: std::cmp::PartialOrd>(param_1: &T, param_2: &T) -> &T{
+    if param_1 > param_2{
         param_1
+    }else{
+        param_2
+    }
+}
+```
+
+- You can see the same issue, we need to specify the `lifetime`. We have solved
+  this before, just we have `generic` dosn't make it any different. We define
+  the `lifetime` in the same `Geenric` angle brackets. Notice that we must
+  provide both `param_1` and `param_2` generic same type since we use `T` for
+  both.
+
+```rust
+fn get_smaller<'a,T: std::cmp::PartialOrd>(param_1: &'a T, param_2: &'a T) -> &'a T{
+
+```
+
+```rust
+fn main(){
+    let var_a = 10;
+    let var_b = 20;
+    let var_k: &str = "wow";
+    let var_w: &str = "again";
+    let output_1 = get_smaller(&var_a, &var_b);
+    let output_2 = get_smaller_2(&var_w, &var_k);
+
+    println!("{output_1:#?}");
+    println!("{output_2:#?}");
     }
 
-    fn main() {
-        static MY_VECT: Vec<f64> = vec![1.2, 32.34];
-        let my_ref = test_3(&MY_VECT);
-        println!("{:?}", my_ref);
-    }
-
-  ```
-
-- After, digging inside, we found, the first arguemnt is correct,
-
-  ```rust
-  fn main(){
-
-    static MY_VECT: &[f64] = &[1.2, 32.344];
-    test_3(&MY_VECT);
-      }
-
-    fn test_3(param_1: &'static &[f64]) -> &'static [f64] {
+//fn get_smaller<T: std::cmp::PartialOrd>(param_1: &T, param_2: &T) -> &T{
+fn get_smaller<'a, T: std::cmp::PartialOrd>(param_1: &'a T, param_2: &'a T) -> &'a T {
+    if param_1 > param_2 {
         param_1
+    } else {
+        param_2
     }
-  ```
+}
+
+fn get_smaller_2<'a, T >(param_1: &'a T, param_2: &'a T) -> &'a T
+where T: std::cmp::PartialOrd{
+    if param_1 > param_2 {
+        param_1
+    } else {
+        param_2
+    }
+}
+```
+
+- Lets talk now about `Structs`. `Struct` also have lifetimes, same like
+  `function`, Rust `struct` concerns only wiht references. If you have a field
+  with a reference type, such as `some_reference_data` below, then, we get our
+  faimilar complier error. Since, `MyStruct` has its own memeory but references
+  some memory outisde of itself you need to make sure the reference lives long
+  enough where it doesn't leave the `MyStruct` referencing bad memeory.
+
+```rust
+struct MyStruct{
+        some_data : Vec<i32>,
+        some_reference_data: &Vec<i32>,
+    }
+
+fn main(){
+
+    }
+```
+
+- So, lets give it a lifetime and apply it to the reference (similar to
+  functions). Seems trivial, and wondering why we need to go through the ceremony!
+
+```rust
+
+struct MyStruct<'a, 'b>{
+        some_data : Vec<i32>,
+        some_reference_data: &'a Vec<i32>,
+        some_reference_data_2: &'b Vec<i32>,
+    }
+
+fn main(){
+
+    }
+```
+
+- We can say, we have two references but they don't have to be the same
+  lifetime. We can also use the `subtype` as we did before. We usually don't
+  have a need to syntax in this form, because usually if We have two references
+  they will be within the same scope and will be autotmaically have same
+  lifetime. However, if you see this syntax you will know what it says.
+
+```rust
+struct MyStruct<'a, 'b: 'a>{
+        some_data : Vec<i32>,
+        some_reference_data: &'a Vec<i32>,
+        some_reference_data_2: &'b Vec<i32>,
+    }
+```
+
+- Often the solution based on the needs is to unified their lifetime, if both
+  `some_reference_data` and `some_reference_data_2` are both created in same
+  scope.
+
+```rust
+struct MyStruct<'a>{
+        some_data : Vec<i32>,
+        some_reference_data: &'a Vec<i32>,
+        some_reference_data_2: &'a Vec<i32>,
+    }
+```
+
+- Typical example with Structs
+
+```rust
+
+#[derive(Debug)]
+struct MyStruct<'a> {
+    some_data: Vec<i32>,
+    some_reference_data: &'a Vec<i32>,
+    some_reference_data_2: &'a Vec<i32>,
+}
+
+/// # Demonstration Function
+/// ## Function Highlights
+/// ### Input
+/// The function require some inputs for demonstration.
+pub fn life_time_concept_fn() {
+    let v1: Vec<i32> = vec![10, 20, 30];
+    let v2: Vec<i32> = vec![40, 50, 60];
+
+    {
+        let obj = MyStruct {
+            some_data: vec![1, 2, 3, 4, 5],
+            some_reference_data: &v1,
+            some_reference_data_2: &v2,
+        };
+        println!("{:#?}", obj);
+    }
+}
+```
+
+- Here is a comparisonn I made, need to be reviewed.
+
+| siutation                                   | Function                                 | structs                    |
+| ------------------------------------------- | ---------------------------------------- | -------------------------- |
+| Input one parameter vs one filed            | implicitly define lifetime               | explicitly define lifetime |
+| Adding another param or field               | trigger new lifetime assignment          | same                       |
+| potential reference (output param or field) | conflict with lifetime, need to specifiy | same                       |
+
+## REFERENCES
+
+- [Rust Lifetimes](https://www.youtube.com/watch?v=1QoT9fmPYr8&t=229s)
