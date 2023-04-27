@@ -18,9 +18,9 @@ resources.
 
 ## To do
 
-- [ ] class Based OOP vs Traits (can be found
+- [x] class Based OOP vs Traits (can be found
       [here](https://www.youtube.com/watch?v=m_phdVlkr6U&t=158s))
-  - [ ] Relationship of other languages to Rust for example, `oop` vs
+  - [x] Relationship of other languages to Rust for example, `oop` vs
         `traits`.
 - [x] Module and Crates for projects
   - including `super`, `self` and `crate` syntax
@@ -31,6 +31,7 @@ resources.
 - [ ] Smart pointers and their usage
 - [ ] Multithreading and mult-processing
 - [ ] Concurrency in Rust and Server for microservice.
+- [x] Debugging in `lldb`
 
 ## How to use
 

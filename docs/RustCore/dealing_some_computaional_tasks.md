@@ -127,3 +127,139 @@ fn get_str_re<'a>(param_1: &'a str, param_2: &'a str) -> Option<&'a str> {
     }
   ```
 
+## Ownership, Reference, lifetime in Struct
+
+Here is an example of a struct with two types of implementations. One has a
+field which is consumed by the method in the sturct and later we adopted the
+reference instead. This example will deepen our understanding and thinking more
+aobut the borrower-checker which causes headache to so many developers.
+
+- Implemntation with moving ownership `no reference` for the heaped allocated `heap_vect`.
+
+```rust
+
+pub fn rust_structs_traits_and_implementation_fn() {
+    #[derive(Debug)]
+    pub struct RandomInfo {
+        pub some_bool: bool,
+        pub some_int: i32,
+        pub heap_vect: Vec<i32>,
+    }
+    impl RandomInfo {
+        pub fn new(param_a: bool, param_b: i32, param_c:Vec<i32>) -> Self {
+            Self {
+                some_bool: !param_a,
+                some_int: param_b,
+                heap_vect: param_c,
+            }
+        }
+        pub fn __str__(&self) -> String {
+            let object_def = format!(
+                "Current object has: some_bool: {} and some_int: {}",
+                &self.some_bool, &self.some_int
+            );
+            object_def
+        }
+
+        /// ## Modifying Function
+        /// Note: This function will consume the input as
+        /// it will give the ownership to the `some_bool` and
+        /// some_int and you cannot use the `param_a` and `param_b`
+        /// even though you passed them as reference, because you dereference
+        /// them later. But, since both are `stack` not `heap` allocated,
+        /// It means they both have trait clone and copy automatically,
+        /// as they both cheapkdata.
+        pub fn modify_field(&self, param_a: &bool, param_b: &i32, param_c: Vec<i32>) -> Self {
+            Self {
+                some_bool: *param_a,
+                some_int: *param_b,
+                heap_vect: param_c,  //<- Already taken the ownership of this variable
+            }
+        }
+    }
+
+    let my_vec = vec![1, 2, 3];
+
+    let mut my_obj = RandomInfo::new(true, 12, my_vec.clone());
+    println!("{my_obj:#?}");
+    let output = my_obj.__str__();
+    println!("{output:#?}");
+
+    let param_a: bool = false;
+    let param_b: i32 = 100;
+
+    my_obj = my_obj.modify_field(&param_a, &param_b, my_vec.clone());
+    let output = my_obj.__str__();
+    println!("{output:#?}");
+
+    let k = 10;
+    let c = my_vec; // You can see that we still can use it again.
+
+
+}
+```
+
+- Here, we will find another solutionn by allowing `reference` with `lifetime`
+  for the `heap_vect`.
+
+```rust
+
+pub fn rust_structs_traits_and_implementation_fn() {
+    #[derive(Debug)]
+    pub struct RandomInfo<'a> {
+        pub some_bool: bool,
+        pub some_int: i32,
+        pub heap_vect: &'a Vec<i32>,
+    }
+    impl<'a> RandomInfo<'a> {
+        pub fn new(param_a: bool, param_b: i32, param_c: &'a Vec<i32>) -> Self {
+            Self {
+                some_bool: !param_a,
+                some_int: param_b,
+                heap_vect: param_c,
+            }
+        }
+        pub fn __str__(&self) -> String {
+            let object_def = format!(
+                "Current object has: some_bool: {} and some_int: {}",
+                &self.some_bool, &self.some_int
+            );
+            object_def
+        }
+
+        /// ## Modifying Function
+        /// Note: This function will consume the input as
+        /// it will give the ownership to the `some_bool` and
+        /// some_int and you cannot use the `param_a` and `param_b`
+        /// even though you passed them as reference, because you dereference
+        /// them later. But, since both are `stack` not `heap` allocated,
+        /// It means they both have trait clone and copy automatically,
+        /// as they both cheapkdata.
+        pub fn modify_field(&self, param_a: &bool, param_b: &i32, param_c: &'a Vec<i32>) -> Self {
+            Self {
+                some_bool: *param_a,
+                some_int: *param_b,
+                heap_vect: param_c,
+            }
+        }
+    }
+
+    let my_vec = vec![1, 2, 3];
+
+    let mut my_obj = RandomInfo::new(true, 12, &my_vec);
+    println!("{my_obj:#?}");
+    let output = my_obj.__str__();
+    println!("{output:#?}");
+
+    let param_a: bool = false;
+    let param_b: i32 = 100;
+
+    my_obj = my_obj.modify_field(&param_a, &param_b, &my_vec);
+    let output = my_obj.__str__();
+    println!("{output:#?}");
+
+    let k = 10;
+    let c = my_vec; // You can see that we still can use it again.
+}
+
+```

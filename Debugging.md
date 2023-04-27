@@ -1,4 +1,5 @@
 # Debugging Process
+
 The following is not for `Rust` execlusivly, you still can use same for
 `C/C++`, `Objective-C` ..etc.
 
@@ -10,8 +11,17 @@ installed `lldb` for `macOS` users or `gdp` for `linux` users.
 - Be sure about the `linenumber` that you will set your `breakpoint` might be
   change if you add more code, it wont accept a line number that is out of a
   function for example.
+- I configured the `lldb` using something called `lldbinit` which will color
+  the memeory output in terminal. Based on two files need in the `home`
+  directory. First file is `~/.lldbinit` and also `~/lldbinit.py` both are
+  obtained from [LLDBINIT](https://github.com/gdbinit/lldbinit).
+- `lldb` in terminal using `cmd` also has a `GUI` client, after you set a
+  breakpoint you can use the `gui` to open it.
 
 ### Steps in lldb
+
+We are using `lldb-1403.0.17.64 Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)` as our current `lldb` version to use it for current
+debugging.
 
 1. Debug your solution for latest code deployed using `cargo run` or `cargo-watch` what so ever.
 2. At the root directory of our `Crate` we run in terminal session the command `lldb`.
@@ -175,13 +185,14 @@ lldb
 0x16fdfe29e: 0xe2b0007b 0x00016fdf 0x21440000 0x00010000
 0x16fdfe2ae: 0xe2d00000 0x00016fdf 0x20d00000 0x00010000
 ```
+
 - You can use after (`n`:next, `s`: step-in, `c`:continue ..etc.). Also, you
   can use the command `run`. [read more
   here](https://lldb.llvm.org/use/map.html)
 
 - There is also `frame info`, Most important is `bt` `backtracer` will show you
   all the current frames created for debugging. Then you can select the number
-  you want to view and run. `framenumber` is taken from the `bt` command.  `bt`
+  you want to view and run. `framenumber` is taken from the `bt` command. `bt`
   is read from bottom to top, as a `stack`.
 
 ```shell
@@ -189,13 +200,32 @@ lldb
 ```
 
 ## Using Nvim
-In `nvim` its strightforward as shown below. We use the command `mem read &var` to debug and check the memory.
+
+In `nvim` its strightforward as shown below. We use the command `mem read &var`
+to debug and check the memory.
+
+- Installing the `lldb` for `nvim` is done using the `dap` module with `mason`
+  and you can find the configurations located at `dap_rust_setting.lua` module
+  in our nvim with the following config
+
+```lua
+    local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+    local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+    local codelldb_path = extension_path .. "adapter/codelldb"
+```
+
+- The adapter for debugging in nvim is located here
+  `~/.local/share/nvim/mason/packages/codelldb/extension/lldb/bin/lldb`.
 - ![Image01](./docs/assets/m02.png)
+
 ## Using vscode
-Also its strightforward, using `vscode memeory veiwer` and also you will need `lldbvm` library.
+
+Also its strightforward, using `vscode memeory veiwer` and also you will need
+`lldbvm` library. The `lldb` is installed at
+`~/.vscode/extensions/vadimcn.vscode-lldb-1.9.0/lldb/bin/lldb` with current
+version `lldb version 16.0.0-custom rust-enabled`
 
 - ![Image01](./docs/assets/m03.png)
-
 
 ## References
 
@@ -206,3 +236,4 @@ Also its strightforward, using `vscode memeory veiwer` and also you will need `l
 - [Referenc_04](https://www.youtube.com/watch?v=v_C1cvo1biI)
 - [Referenc_05](https://www.youtube.com/watch?v=2GV0K9Y2MKA)
 - [Referenc_06](https://www.youtube.com/watch?v=S3TB2pDOEWY)
+- [Debugging, Printing and logging](https://learn.udacity.com/courses/ud774)

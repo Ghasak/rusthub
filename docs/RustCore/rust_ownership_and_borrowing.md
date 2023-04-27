@@ -112,8 +112,7 @@ println!("{}", heap_i8);
    `heap_i8_2`.
 3. Since you cannot have two owners for same data allocation, rust complier
    will drop the variable `heap_i8` and its got cleaned in memeory.
-4. Therefore, the above will produce an error `borrow of moved value: heap_i8
-value borrowed herre after move`.
+4. Therefore, the above will produce an error `borrow of moved value: heap_i8 value borrowed herre after move`.
 
 #### Why?
 
@@ -635,8 +634,7 @@ error[E0382]: use of moved value: `some_int_var`
 
 ```
 
-- But, later, as I start using the complier `Rust: rustc 1.67.0 (fc594f156
-2023-01-24)`, I start being able to complie, and the reason is:
+- But, later, as I start using the complier `Rust: rustc 1.67.0 (fc594f156 2023-01-24)`, I start being able to complie, and the reason is:
   - It seems that starting from Rust 1.45, the Copy trait is automatically
     implemented for types that implement Clone, and i32 is one of these types.
     Therefore, the code you provided earlier will compile without any issues on
@@ -670,4 +668,89 @@ fn working_style(mut a: f64, mut b: f64) -> Result<f64, String> {
         Err("This is not acceptable, c > 10 ".to_owned())
     }
 }
+```
+
+## Detials about ownership
+
+In Rust, ownership and the borrow checker exist primarily to manage memory
+safety. The idea is that if you own a value, you have the responsibility to
+clean up that value when it's no longer needed. The borrow checker enforces the
+rules that ensure that there's never more than one owner of a given value, and
+that the value is always cleaned up properly.
+
+- When it comes to stack-allocated values, the copy trait makes it easy to create
+  new copies of a value without having to worry about ownership or the borrow
+  checker. This is because stack-allocated values are cheap to copy, and the copy
+  trait is automatically implemented for them.
+
+- However, it's important to note that stack-allocated values are still subject
+  to the same ownership and borrowing rules as heap-allocated values. The main
+  difference is that stack-allocated values can be cheaply copied, while
+  heap-allocated values must be moved or cloned to be copied.
+
+- So, while ownership and the borrow checker may not be as much of an issue for
+  stack-allocated values, they're still important concepts to understand when
+  writing Rust code.
+
+- In the following example, `consumed_vec` owndership passed to `x` and got
+  dropped. You can check that you cannot print the `consumed_vec` anymore. Its
+  ownership moved to `x`.
+
+```rust
+
+fn main() {
+    let consumed_vec: Vec<i32> = vec![100, 200, 300, 400, 500];
+
+    let x = consumed_vec;
+    println!("{:#?}", x);
+}
+
+
+```
+
+## When the ownership is moved
+
+Ownership in Rust is moved under the following circumstances:
+
+1. Assigning an owned value to another variable: When you assign an owned value
+   to another variable, ownership is moved to the new variable. For example:
+
+```rust
+let v1 = vec![1, 2, 3];
+let v2 = v1;
+// ownership of the vector is moved to v2, v1 is now invalid
+```
+
+2. Passing an owned value as a function argument: When you pass an owned value
+   as a function argument, ownership is moved to the function. For example:
+
+```rust
+fn takes_ownership(v: Vec<i32>) {
+// ownership of the vector is moved to the function
+}
+let v = vec![1, 2, 3];
+takes_ownership(v);
+// ownership of the vector is transferred to the function, v is now invalid
+```
+
+3. Returning an owned value from a function: When you return an owned value
+   from a function, ownership is moved to the calling code. For example:
+
+```rust
+fn gives_ownership() -> Vec<i32> {
+let v = vec![1, 2, 3];
+v // ownership of the vector is moved to the calling code
+}
+let v = gives_ownership();
+// ownership of the vector is transferred to the calling code
+```
+
+4. Binding a value to a match arm: When you bind a value to a match arm,
+   ownership is moved to the arm. For example:
+
+```rust
+let value = Some(vec![1, 2, 3]);
+match value {
+Some(v) => {
+//
 ```
