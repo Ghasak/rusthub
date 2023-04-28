@@ -22,7 +22,7 @@ use concepts::ch01::{
 use concepts::ch02::generic;
 use concepts::ch03::{
     enum_option_in_depth, life_time_concept, rust_ownership_and_borrowing,
-    structs_traits_and_implementation,
+    structs_traits_and_implementation, enum_in_rust
 };
 use concepts::create_text;
 use concepts::easy_rust::{
@@ -91,5 +91,6 @@ fn main() {
     //rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
     //enum_option_in_depth::option_enum_concept_fn();
     //life_time_concept::life_time_concept_fn();
-    structs_traits_and_implementation::rust_structs_traits_and_implementation_fn();
+    //structs_traits_and_implementation::rust_structs_traits_and_implementation_fn();
+    enum_in_rust::enum_in_rust_concept_fn();
 }

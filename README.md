@@ -24,6 +24,7 @@ resources.
         `traits`.
 - [x] Module and Crates for projects
   - including `super`, `self` and `crate` syntax
+- [x] Ownership, move and borrowing
 - [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
 - [ ] Webserver (easy, or complicated like Tokio)
 - [ ] Adding `JupyterNotebook` support for `Rust`,

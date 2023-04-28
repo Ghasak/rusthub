@@ -1,4 +1,5 @@
 # Enum Option vs Result in Depth
+
 Option and Result are both types in Rust that help handle situations where a
 value may or may not exist or an operation may or may not succeed. The primary
 difference between them is their use case. `Option` is used when a value may or
@@ -20,11 +21,13 @@ a missing value, and use Result when you're dealing with the possibility of an
 operation failing.
 
 ## Option Enum Concept
+
 Typically, this involve using `Option` enum which is formulated from any data
 structure. basically, its about if the value is available then it is `Some`
 otherwise its `None`. Its a way to safely to get value form an operation if its
-possible. There are several  methods in rust to extract values from `OPTION`,
+possible. There are several methods in rust to extract values from `OPTION`,
 to name few:
+
 - `unwrap()` method
 - `expect()` method
 - `match` statement
@@ -36,6 +39,7 @@ pub enum Option<T>{
         None
     }
 ```
+
 ### Example -1 How to use Option Enum
 
 ```rust
@@ -101,9 +105,6 @@ fn get_value_by_index(my_vector: &Vec<i32>, get_element_idx: usize) -> String {
 }
 ```
 
-
-
-
 ### Example -3 Find a word in a sentence.
 
 ```rust
@@ -131,9 +132,7 @@ fn find_word(sentence: &str, word: &str) -> Option<usize>{
 }
 ```
 
-
 ### Example -4 Using Option vs Result
-
 
 ```rust
 
@@ -175,7 +174,6 @@ fn divide_by_2(a: f64, b: f64) -> Result<f64, String> {
     }
 }
 ```
-
 
 ### Example -5 Using match with Option
 
@@ -243,14 +241,18 @@ fn main() {
 ```
 
 ## Result Enum Concept
-**
+
+\*\*
+
 ```rust
 pub enum Result<T, E> {
     Ok(T),
     Err(E),
 }
 ```
+
 ### Example -1 Using Result with reading file
+
 ```rust
 
 use std::fs;
@@ -297,6 +299,7 @@ fn main() {
     }
 }
 ```
+
 ### Example 3- Result vs If statement
 
 ```rust
@@ -322,6 +325,7 @@ println!("{:#?}", result);
 
 
 ```
+
 ### Example 4- Split a vector with Result Enum
 
 ```rust

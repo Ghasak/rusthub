@@ -325,16 +325,16 @@ impl RandomInfo{
 - So, It doesn't matter if you're using somebody else struct buried in some
   reference crate. You can extend it quite easily.
 
------
+---
 
-| idx | note                                                                                            | example                                   |
+| idx | Note                                                                                            | Example                                   |
 | --- | ----------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | 1.  | It seems `new` function name is the only method for impl for a struct, doesn't need `&str`      | fn new(param_a) almost like a constructor |
 | 2.  | You must provide `&self` for every function for any implmented method for the struct,           | fn some_method(&self, param_a)            |
 | 3.  | You need `Self` to refere to the `struct` and it is considered as a `type` accessed with (`::`) | let obj = RandomInfo::new()               |
 | 4.  | You will need `&self` for accessing data in the constructed `struct` access with (`.`) notation | obj.data_value                            |
 
------
+---
 
 - Object-oriented programming also has a concept of polymorphism. Meaning
   treating different objects the same regardless of whether they're inherited
@@ -349,7 +349,6 @@ impl RandomInfo{
   function signature for each one, but with the `&self` keyword it doesn't
   matter. It's a way for us to be more abstract about our programming.
 
-
 ```rust
 pub trait SomeTrait{
     fn is_valid(&self)-> bool;
@@ -357,6 +356,7 @@ pub trait SomeTrait{
 
     }
 ```
+
 - In line with that let's say you wanted to implement a function that compared
   a different variables of the same type. btw, We use `Pascal's` cases to write
   the `Struct` and the `Trait` names.
@@ -385,4 +385,229 @@ impl SomeTrait for RandomInfo{
   definitions so that can be used on multiple structs this is how `Rust`
   achieve polymorphism.
 
+- Lets check about adding some functionality to a struct without a need to know
+  where the struct is located.
+-
 
+```rust
+impl SomeTrait for RandomInfo{
+        fn is_valid(&self) -> bool {
+                tru
+            }
+    }
+
+fn print_if_is_valid(check_me: &dyn SomeTrait){
+        if check_me.is_valid(){
+                println!("Yay!");
+
+            }
+    }
+
+```
+
+- Let's implement a `trait` called `Default` which will allow to initalize data
+  for our created `struct`. These data will be the default once you constrcut your struct `MyStruct`.
+
+```rust
+impl Default for MyStruct{
+        fn default() -> Self{
+                Self{
+                    some_bool : true,
+                    some_float: 10.3,
+                    some_int : 80,
+                    random::RandomInfo::new(true),
+                    }
+            }
+    }
+```
+
+- Now, If you need a default data, you can change,
+
+```rust
+let my_obj = MyStruct{
+        some_bool : true ,
+        some_float: 10.3,
+        some_int : 80,
+        random: RandomInfo::new(true),
+    }
+
+```
+
+- To the following
+
+```rust
+let my_obj = MyStruct::default();
+```
+
+- Often you will see a `trait` called `Debug` which is often used when printing
+  to the terminal or a formatted string. You get a complie error because we
+  aren't implementing trait debug yet, Instead implementing the `Debug` trait
+  by hand, we can use `Macro` to implement that trait to our defined strcut.
+  We just annotate our `struct` with `#[derive(Debug)]`.
+- You can also import `traits` which are very powerful like `Copy` `Clone`,
+  `Equivalent`, `Partial_Equivalent` ..etc. You can see the description of each
+  of these what each `trait` does.
+
+- Finally, a `struct` with no fields is called `unit struct` such as `struct
+  LookMaNoFields{};`. This is commonly used when you want to group some
+  functionality together even if there's no data.
+- There is also `Generic struct` that we will learn to use later in the topic of `Generic`.
+
+```rust
+struct LookMaNofields{};
+struct Pair<T>{x: T, y: T, };
+struct Color(u8, u8, u8);
+```
+
+-------
+
+## Example Using Rust Display Trait
+
+In the following example, you will notice that we use the trait `Display` which
+will allow us to create a `println!("{})` without a need to specify the
+necessity of using `println!("{:#?}")` in Debug Mode. Also you don't need to
+include the `#[derive(Debug)]` on top of our implemented struct.
+
+```rust
+
+use rand::Rng;
+
+pub fn rust_structs_traits_and_implementation_fn() {
+    let mut point_1: Point = Point::new(0.00, 0.00);
+    let mut rng = rand::thread_rng();
+    point_generator(&mut point_1, &mut rng);
+}
+
+pub struct Point {
+    x: f32,
+    y: f32,
+}
+
+impl std::fmt::Display for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, " -> point location : <{:.2},{:.2}>", self.x, self.y)
+    }
+}
+
+impl Point {
+    fn new(x_coord: f32, y_coord: f32) -> Self {
+        Self {
+            x: x_coord,
+            y: y_coord,
+        }
+    }
+}
+
+#[allow(unused_assignments)]
+fn point_generator(point: &mut Point, rng: &mut rand::rngs::ThreadRng) {
+    for i in 0..100 {
+        let x_new: f32 = rng.gen();
+        let y_new: f32 = rng.gen();
+        point.x = x_new;
+        point.y = y_new;
+        println!("{}", point);
+    }
+}
+```
+
+## Example of using trait Debug Manually
+
+Instead using `#[dervie(Debug)]`, we can implement this trait Manually using.
+In this example, we're manually implementing the Debug trait for MyStruct using
+the impl keyword. Inside the implementation, we're using the debug_struct
+method of the Formatter to create a debug representation of the struct. We then
+use the field method to add each field to the debug representation, and finally
+call finish to complete the representation.
+
+- This implementation allows us to print a debug representation of MyStruct
+  using the `{:?}` format specifier in println!.
+
+```rust
+use std::fmt;
+
+struct MyStruct {
+    foo: i32,
+    bar: String,
+}
+
+impl fmt::Debug for MyStruct {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("MyStruct")
+            .field("foo", &self.foo)
+            .field("bar", &self.bar)
+            .finish()
+    }
+}
+
+fn main() {
+    let my_struct = MyStruct {
+        foo: 42,
+        bar: String::from("hello"),
+    };
+    println!("{:?}", my_struct);
+}
+```
+
+## Implementation of Clone and Copy
+- Its sometime important to use the `trait` `Copy` and `Clone` to get remove
+  the ownership problem. For example the following `struct` namely `Person` as
+  we didn't include the `#[derive(Copy, Clone)]` on top. We will see the code
+  as we will implement it manually. The Copy trait is a marker trait in Rust
+  that indicates that a type can be copied by simply copying its bytes to
+  another location in memory. To implement the Copy trait manually, we need to
+  define a clone method that returns a copy of the object. Here's an example
+  implementation of the Copy trait for a simple Person struct:
+
+
+```rust
+struct Person {
+    name: String,
+    age: u32,
+}
+
+impl Clone for Person {
+    fn clone(&self) -> Person {
+        Person {
+            name: self.name.clone(),
+            age: self.age,
+        }
+    }
+}
+
+impl Copy for Person {}
+
+fn main() {
+    let person1 = Person {
+        name: String::from("Alice"),
+        age: 25,
+    };
+
+    // `person2` is a copy of `person1` because `Person` implements the `Copy` trait
+    let person2 = person1;
+
+    println!("Person 1: {:?}", person1);
+    println!("Person 2: {:?}", person2);
+}
+
+```
+
+- In the example above, we implemented the Clone trait for the Person struct to
+  provide a way to make a copy of the object. Then we implemented the Copy
+  trait manually for the Person struct by simply adding an empty implementation
+  block. This tells the Rust compiler that the Person struct can be safely
+  copied by simply copying its bytes.
+
+
+## Trait Symmary
+
+| idx | Trait Type         | implementation                        | Note                             |
+| --- | ------------------ | ------------------------------------- | -------------------------------- |
+| 1   | Display            | println!("{}")                        | Use directly to print the object |
+| 2   | Debug              | println!("{:?}") or println!("{:#?}") | Use directly to print the object |
+| 3   | Iter               | Create iterator                       |                                  |
+| 4   | Equavilent         | Comparing two object                  |                                  |
+| 5   | Partial_Equivalent | same                                  |                                  |
+| 6   | Copy               | Avoid ownership issue                 |                                  |
+| 7   | Clone              | same                                  |                                  |
+
+- Any many others.
