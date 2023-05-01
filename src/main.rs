@@ -21,15 +21,14 @@ use concepts::ch01::{
 };
 use concepts::ch02::generic;
 use concepts::ch03::{
-    enum_option_in_depth, life_time_concept, rust_ownership_and_borrowing,
-    structs_traits_and_implementation, enum_in_rust
+    enum_in_rust, enum_option_in_depth, generic_in_rust, life_time_concept,
+    rust_ownership_and_borrowing, structs_traits_and_implementation,
 };
 use concepts::create_text;
 use concepts::easy_rust::{
     self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
 };
-use concepts::playground::random_module;
-use concepts::playground::random_selection;
+use concepts::playground::{async_factorial_vs_sync_factorial, random_module, random_selection};
 //? Out main function
 ///
 //? # Main example library
@@ -88,9 +87,11 @@ fn main() {
     //random_module::random_stuff()
     //rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
     //random_selection::using_random_selection_fn();
+    //async_factorial_vs_sync_factorial::comparison_factorial_results();
     //rust_ownership_and_borrowing::rust_owner_ship_and_borrowing_concept();
     //enum_option_in_depth::option_enum_concept_fn();
     //life_time_concept::life_time_concept_fn();
     //structs_traits_and_implementation::rust_structs_traits_and_implementation_fn();
-    enum_in_rust::enum_in_rust_concept_fn();
+    //enum_in_rust::enum_in_rust_concept_fn();
+    generic_in_rust::generic_in_rust_concept();
 }

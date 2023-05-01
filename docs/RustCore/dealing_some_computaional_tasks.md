@@ -263,3 +263,81 @@ pub fn rust_structs_traits_and_implementation_fn() {
 }
 
 ```
+
+## Async vs Sync for Factorial Calaculation
+- `n` should not be larger than 20 as we will get to overflow.
+
+```rust
+
+use std::time::Instant;
+//use tokio::runtime::Runtime;
+use std::thread;
+
+pub fn comparison_factorial_results(){
+
+use std::thread;
+
+// Compute factorial of N using sync
+fn factorial_sync(n: u64) -> u64 {
+    if n == 0 {
+        1
+    } else {
+         n * factorial_sync(n - 1)
+    }
+}
+
+// Compute factorial of N using async
+async fn factorial_async(n: u64) -> u64 {
+    if n == 0 {
+        1
+    } else {
+        let handle = thread::spawn(move|| factorial_sync(n - 1));
+        let sub_factorial = handle.join().unwrap();
+         n * sub_factorial
+    }
+}
+
+// Compute factorial of N using async and multi-threading
+async fn factorial_async_multithreaded(n: u64) -> u64 {
+    if n == 0 {
+       1
+    } else {
+        let num_threads = num_cpus::get();
+        let chunk_size = n / num_threads as u64;
+        let mut handles = Vec::new();
+        for i in 0..num_threads {
+            let start = i as u64 * chunk_size + 1;
+            let end = if i == num_threads - 1 { n } else { (i as u64 + 1) * chunk_size };
+            let handle = thread::spawn(move || {
+                let mut sub_factorial = 1;
+                for j in start..=end {
+                    sub_factorial *= j;
+                }
+                sub_factorial
+            });
+            handles.push(handle);
+        }
+        let mut sub_factorials = Vec::new();
+        for handle in handles {
+            sub_factorials.push(handle.join().unwrap());
+        }
+        let mut result = 1;
+        for sub_factorial in sub_factorials {
+            result *= sub_factorial;
+        }
+        result
+    }
+}
+
+    let n = 18;
+    // let result_sync = factorial_sync(n);
+    // println!("Factorial of {} using sync: {}", n, result_sync);
+
+    // let result_async = futures::executor::block_on(factorial_async(n));
+    // println!("Factorial of {} using async: {}", n, result_async);
+    //
+    let result_async_mt = futures::executor::block_on(factorial_async_multithreaded(n));
+    println!("Factorial of {} using async and multi-threading: {}", n, result_async_mt);
+}
+
+```

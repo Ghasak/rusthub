@@ -4,3 +4,4 @@ pub mod enum_option_in_depth;
 pub mod life_time_concept;
 pub mod structs_traits_and_implementation;
 pub mod enum_in_rust;
+pub mod generic_in_rust;
