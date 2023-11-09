@@ -160,7 +160,7 @@ pub fn generic_function_example_03() {
 /// ```
 pub fn generic_function_example_04() {
     /// If you want to implement a Display trait, you must hard-code it to your struct
-    use std::fmt::{self,Debug, Display};
+    use std::fmt::{self, Debug, Display};
 
     #[derive(Debug)]
     struct Animal {
@@ -181,17 +181,11 @@ pub fn generic_function_example_04() {
     // Notice that we don't need to specifiy the ? here
     println!("{}", charlie);
 
-
     // If you didnt implment the `Display` above, you cannot use it here in the generic
     // while the `Debug` trait is alreayd being used in the macro `Debug`.
-    fn show_in_generic<T: Display + Debug>(animal:T) {
-        println!("{}", animal );
-
+    fn show_in_generic<T: Display + Debug>(animal: T) {
+        println!("{}", animal);
     }
 
     show_in_generic(charlie);
-
 }
-
-
-

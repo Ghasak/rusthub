@@ -9,13 +9,13 @@
 
 - Writing applications for the `WebDev`.
 - Writing CLI applications
-- Checking probability advanced topic with Rust
+- Checking probability  topic with Rust
 - Develop similar Pythonic `machine learning` and `deep learning` applications.
 
 
 
 # How to learn Rust
-- Writing algorithmic `Advanced Econometrics` modeling running on high-speed.
+- Writing algorithmic ` Econometrics` modeling running on high-speed.
 
 - [x] String types and their usages
 - [ ] Smart pointers (box, ref ..etc. ).

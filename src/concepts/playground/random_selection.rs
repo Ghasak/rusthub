@@ -1,8 +1,8 @@
 //use rand::prelude::*;
-use std::io;
-use std::fmt;
-use std::collections::HashMap;
 use rand::Rng;
+use std::collections::HashMap;
+use std::fmt;
+use std::io;
 
 #[allow(unused_variables)]
 #[allow(unknown_lints)]
@@ -45,15 +45,15 @@ pub fn using_random_selection_fn() {
         }
     }
     impl fmt::Display for Move {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Move::right => write!(f, "right"),
-            Move::left => write!(f, "left"),
-            Move::up => write!(f, "up"),
-            Move::down => write!(f, "down"),
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            match self {
+                Move::right => write!(f, "right"),
+                Move::left => write!(f, "left"),
+                Move::up => write!(f, "up"),
+                Move::down => write!(f, "down"),
+            }
         }
     }
-}
 
     let mut rng = rand::thread_rng(); // Initialize a random number generator
 

@@ -21,7 +21,7 @@ use concepts::ch01::{
 };
 use concepts::ch02::generic;
 use concepts::ch03::{
-    enum_in_rust, enum_option_in_depth, generic_in_rust, life_time_concept,
+    enum_in_rust, enum_option_in_depth, generic_in_rust, life_time_concept, results_and_options,
     rust_ownership_and_borrowing, structs_traits_and_implementation,
 };
 use concepts::create_text;
@@ -47,6 +47,7 @@ use colored::*;
 use concepts::my_emoji;
 /// ==========================================================================
 mod numerical_analysis;
+use crate::concepts::ch03::results_and_options::MyInfo;
 use numerical_analysis::ordinary_differential_equations;
 
 fn main() {
@@ -93,5 +94,31 @@ fn main() {
     //life_time_concept::life_time_concept_fn();
     //structs_traits_and_implementation::rust_structs_traits_and_implementation_fn();
     //enum_in_rust::enum_in_rust_concept_fn();
-    generic_in_rust::generic_in_rust_concept();
+    //generic_in_rust::generic_in_rust_concept();
+
+    let v: MyInfo = MyInfo::new(
+        "Jack".to_string(),
+        "Michael".to_string(),
+        true,
+        23,
+        "Jack_Michael@gmail.com".to_string(),
+    );
+    //results_and_options::results_and_option();
+
+    let output = results_and_options::testing_my_info(v);
+    let mut result = String::new();
+    if let Some(v) = output {
+        result.push_str(&v)
+    }
+    println!("{result:#?}");
+
+    let mut output = String::new();
+    for i in 0..15 {
+        let temp = format!("{}", i);
+        output.push_str(&temp);
+        println!("{i:#?} -> {output:#?}")
+    }
+
+    let my_string = String::from("This just a test for my current string .... ");
+    println!("my current string is -> {my_string:#?}")
 }

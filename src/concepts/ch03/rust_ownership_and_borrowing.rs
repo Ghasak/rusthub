@@ -14,7 +14,11 @@ struct my_struct {
 #[allow(renamed_and_removed_lints)]
 #[allow(uninlined_format_args)]
 pub fn rust_owner_ship_and_borrowing_concept() {
-    let mut var_1 = my_struct { a: 9, b: 10.0 , c: "Wow".to_string()};
+    let mut var_1 = my_struct {
+        a: 9,
+        b: 10.0,
+        c: "Wow".to_string(),
+    };
     some_procedure(&mut var_1);
     println!("{:#?}", var_1);
 }

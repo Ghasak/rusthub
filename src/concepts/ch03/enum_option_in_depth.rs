@@ -1,5 +1,3 @@
-
-
 pub fn option_enum_concept_fn() {
     let my_vect: Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7];
 

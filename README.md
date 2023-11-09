@@ -26,12 +26,12 @@ resources.
   - including `super`, `self` and `crate` syntax
 - [x] Ownership, move and borrowing
 - [x] life-time, check [here](https://www.youtube.com/watch?v=1QoT9fmPYr8)
-- [ ] Webserver (easy, or complicated like Tokio)
+- [ ] Web-server (easy, or complicated like Tokio)
 - [ ] Adding `JupyterNotebook` support for `Rust`,
 - [ ] Chaining methods, iterators and closures.
 - [ ] Smart pointers and their usage
-- [ ] Multithreading and mult-processing
-- [ ] Concurrency in Rust and Server for microservice.
+- [ ] Multithreading and multi-processing
+- [ ] Concurrency in Rust and Server for micro-services.
 - [x] Debugging in `lldb`
 
 ## How to use
@@ -136,7 +136,7 @@ You can use `cargo-watch` which will keep on running our project and working in 
   cargo-watch -c -x run --quiet
   ```
 
-- You can also use advanced `cargo watch` for example
+- You can also use  `cargo watch` for example
   - Check the flags in the cargo-watch command (e.g. -w is for watch a spefic directory).
 
 ```shell

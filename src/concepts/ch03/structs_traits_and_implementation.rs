@@ -31,10 +31,13 @@ impl RandomInfo {
         object_report_string
     }
 
-    fn computional_implementation(&mut self, value: i32){
-        for i in 0..value{
+    fn computional_implementation(&mut self, value: i32) {
+        for i in 0..value {
             self.some_int = self.some_int + i;
-            println!("[+] -> getting the value => {:#?} from i value => {:.20} ", self.some_int, i)
+            println!(
+                "[+] -> getting the value => {:#?} from i value => {:.20} ",
+                self.some_int, i
+            )
         }
     }
 }
@@ -49,5 +52,3 @@ pub fn rust_structs_traits_and_implementation_fn() {
     println!("{}", another_obj.show_information(true));
     println!("{:#?}", another_obj.computional_implementation(10));
 }
-
-

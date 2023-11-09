@@ -20,7 +20,8 @@ installed `lldb` for `macOS` users or `gdp` for `linux` users.
 
 ### Steps in lldb
 
-We are using `lldb-1403.0.17.64 Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)` as our current `lldb` version to use it for current
+We are using `lldb-1403.0.17.64 Apple Swift version 5.8 (swiftlang-5.8.0.124.2
+clang-1403.0.22.11.100)` as our current `lldb` version to use it for current
 debugging.
 
 1. Build your solution for latest code changes, deployed using `cargo run` or `cargo-watch -c -x run --quiet`

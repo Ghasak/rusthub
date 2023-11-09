@@ -532,6 +532,12 @@ pub fn function(){
     - Same level of `dir` put `<same_dir_name>.rs` (Rust 2018)
 
 
+- `2023-07-04 22:54` In Rust the equavlent concepts `namespaces` in `cpp` is the `mod`. As we
+already seen, Modules in Rust are used to group related functions, structs, and
+other items together. They also provide a way to contorl the visibility of
+items, which is similar to the way namespaces contorl the visibility of
+declaration in C++.
+
 ## Tools for investigating the project skelton in Rust
 You will need a `Crate` called `cargo-modules` which will allow us to visulize the our developed crate modules tree.
 ```rust

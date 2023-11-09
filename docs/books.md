@@ -20,6 +20,8 @@
 - [Rust Cook Book](https://rust-lang-nursery.github.io/rust-cookbook/intro.html)
 - [The Rust Edition Guide](https://doc.rust-lang.org/edition-guide/introduction.html)
 - [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/index.html)
+- [The rustc book ](https://doc.rust-lang.org/rustc/what-is-rustc.html)
+- [effective-rust](https://www.lurklurk.org/effective-rust/print.html)
 
 ## Must Read
 - [project about rocket written in Rust](https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)

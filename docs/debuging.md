@@ -23,7 +23,6 @@ or
 run
 or simply
 r
-
 ```
 
 - Read more about using the `lldb` [here](https://lldb.llvm.org/use/tutorial.html)
