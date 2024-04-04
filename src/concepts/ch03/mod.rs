@@ -5,3 +5,4 @@ pub mod life_time_concept;
 pub mod results_and_options;
 pub mod rust_ownership_and_borrowing;
 pub mod structs_traits_and_implementation;
+pub mod understanding_traits_concept;

@@ -24,6 +24,9 @@ use concepts::ch03::{
     enum_in_rust, enum_option_in_depth, generic_in_rust, life_time_concept, results_and_options,
     rust_ownership_and_borrowing, structs_traits_and_implementation,
 };
+
+use concepts::ch03::understanding_traits_concept::testing_trait_fundamental_concept;
+
 use concepts::create_text;
 use concepts::easy_rust::{
     self, easy_rust007_debug_printing, easy_rust008_mutability, easy_rust028_enums_all_parts,
@@ -120,5 +123,7 @@ fn main() {
     }
 
     let my_string = String::from("This just a test for my current string .... ");
-    println!("my current string is -> {my_string:#?}")
+    println!("my current string is -> {my_string:#?}");
+    println!("Trait Concept in depth ..");
+    testing_trait_fundamental_concept();
 }

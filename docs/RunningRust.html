@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>RunningRust.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1 id="how-to-run-rust">How to run Rust</h1>
+<h2 id="compile-your-binary">Compile your binary</h2>
+<p>There are several ways to compile your programm.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> run <span class="at">--quiet</span></span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rustc</span> src/main.rs <span class="kw">&amp;&amp;</span> <span class="ex">/target/debug/</span><span class="op">&lt;</span>binary_name<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># example</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rustc</span> src/main.rs <span class="kw">&amp;&amp;</span> <span class="ex">target/debug/rust_cli</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct way to send the binary to the location we know</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rustc</span>  src/main.rs  <span class="at">-o</span> target/debug/output <span class="kw">&amp;&amp;</span> <span class="ex">target/debug/output</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> build <span class="at">--quiet</span> <span class="kw">&amp;&amp;</span> <span class="ex">./target/debug/</span><span class="op">&lt;</span>binary_name<span class="op">&gt;</span></span></code></pre></div>
+<h2 id="adding-colors-and-nerd-fonts-in-rust">Adding Colors and Nerd
+fonts in Rust</h2>
+<ol type="1">
+<li>Adding colors There are two ways</li>
+</ol>
+<ul>
+<li>Adding using the <code>carte</code> called <code>colored</code></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">colored::</span>Colorize<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;{}, {}, {}, {}, {}, {}, and some normal text.&quot;</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Bold&quot;</span>)<span class="op">.</span>bold()<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Red&quot;</span>)<span class="op">.</span>red()<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Yellow&quot;</span>)<span class="op">.</span>yellow()<span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Green Strikethrough&quot;</span>)<span class="op">.</span>green()<span class="op">.</span>strikethrough()<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Blue Underline&quot;</span>)<span class="op">.</span>blue()<span class="op">.</span>underline()<span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="pp">format!</span>(<span class="st">&quot;Purple Italics&quot;</span>)<span class="op">.</span>purple()<span class="op">.</span>italic()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>Using the <code>hexdecimal</code> representations</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="pp">println!</span>(<span class="st">&quot;Now we have the following   </span><span class="sc">\x1b</span><span class="st">[93mError -&gt; </span><span class="sc">\u{f013}\x1b</span><span class="st">[0m::-&gt; greek = {:?}&quot;</span><span class="op">,</span> greeks)<span class="op">;</span></span></code></pre></div>
+<ol start="2" type="1">
+<li>Adding Icons (nerd font) You can use <code>\u{0000}</code> following
+the hexa deciaml representations.</li>
+</ol>
+<ul>
+<li><a
+href="https://stackoverflow.com/questions/69981449/how-do-i-print-colored-text-to-the-terminal-in-rust">How
+do I print colored text to the terminal in Rust</a></li>
+</ul>
+
+</body>
+</html>

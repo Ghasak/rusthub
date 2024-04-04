@@ -2,7 +2,7 @@
 
 - Using `Enum` when you have a `pattern` that need variant, a selection of one
   option among many, that you access one at a time, which is a bit different
-  from `strcut` which is used to store many optoins and use them all combined.
+  from `strcut` which is used to store many options and use them all combined.
 
 
 ```rust
@@ -55,5 +55,3 @@ associated String values:
     println!("We have  loopback-> {:#?}", loopback);
 
 ```
-
-

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Rust_tips_and_notes.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1 id="rust-fundamental-programming">Rust Fundamental programming</h1>
+<h2 id="string-types">String types</h2>
+<p>There are two types of strings in <code>Rust</code> and you can
+initialize the string on <code>stack</code> or <code>heap</code>. The
+most important part, is that you have to compare two strings should be
+same to produce the results you want.</p>
+<ul>
+<li>if the size is keep on changing use the <code>heap</code></li>
+<li>if the size is stable and known in compilation time use
+<code>stack</code></li>
+<li>You can append to string using <code>push</code> or
+<code>push_str</code> methods</li>
+<li>exclusively we distinguish between the two types as
+<code>&amp;str</code> is on <code>stack</code> while <code>String</code>
+(<code>new</code>) keyword means its on <code>heap</code>.</li>
+</ul>
+<h2 id="controlling-memeory-for-variables">Controlling memeory for
+variables</h2>
+<p>You can use <code>shadowing</code> which will allow you to keep same
+memory for a given variable without a need to create new variable. This
+is useful when you want to converate the same variable from one given
+type to another.</p>
+<h2 id="shadowing">Shadowing</h2>
+<p>One of the aspect, when using <code>loop</code> or
+<code>while</code>, is that if the <code>String</code> is keep on
+chaning, then you can shadow it at every iteration using</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> some_value_bool <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> guessing <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<h2 id="empty-string">Empty String</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s3 <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">.</span>to_string()<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s4 <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">.</span>to_owned()<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s5 <span class="op">=</span> <span class="pp">format!</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;({})&quot;</span><span class="op">,</span> s1<span class="op">.</span>trim()<span class="op">.</span>is_empty())<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;({})&quot;</span><span class="op">,</span> s2<span class="op">.</span>trim()<span class="op">.</span>is_empty())<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;({})&quot;</span><span class="op">,</span> s3<span class="op">.</span>trim()<span class="op">.</span>is_empty())<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;({})&quot;</span><span class="op">,</span> s4<span class="op">.</span>trim()<span class="op">.</span>is_empty())<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;({})&quot;</span><span class="op">,</span> s5<span class="op">.</span>trim()<span class="op">.</span>is_empty())<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="array-and-vector-in-rust">Array and Vector in Rust</h2>
+<ul>
+<li><code>array</code> is what we call it a list, but must be all
+elements in same type. <code>array</code> is constructed on
+<code>stack</code> and must known the size.</li>
+<li><code>Vector</code> is another list, but on <code>heap</code> the
+size can be different, all elements must be same data type.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Assumption</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// guessing is String on heap created using String::new(); hold some string.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. List on Stack can be written as:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> test_args<span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">3</span>] <span class="op">=</span> [ <span class="st">&quot;quit&quot;</span><span class="op">,</span> <span class="st">&quot;Quit&quot;</span><span class="op">,</span> <span class="st">&quot;q&quot;</span>]<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">// On stack you can use, to compare &amp;str to str  assume guessing is a String, trim will converate it from String to str</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. You can see that we derefernce the string to make it clear to compare &amp;str to &amp;str</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> exiting_guessing <span class="op">=</span> test_args<span class="op">.</span>iter()<span class="op">.</span>any(<span class="op">|</span>v<span class="op">|</span> v <span class="op">==</span> <span class="op">&amp;</span>guessing<span class="op">.</span>trim())<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. If we want to find a string in a list of &amp;str on stack</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">// let _existing_guessing = test_args.contains(&amp;guessing.trim());</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">// *******************************************************************************************</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. List on Heap can be written as:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> test_args <span class="op">=</span> <span class="pp">vec!</span>[<span class="st">&quot;quit&quot;</span><span class="op">.</span>to_string()<span class="op">,</span> <span class="st">&quot;q&quot;</span><span class="op">.</span>to_string()<span class="op">,</span> <span class="st">&quot;Q&quot;</span><span class="op">.</span>to_string()]<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. On heap you can use, to compare String to String assume guessing is a String</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> exiting_guessing <span class="op">=</span> test_args<span class="op">.</span>iter()<span class="op">.</span>any(<span class="op">|</span>v<span class="op">|</span> v <span class="op">==</span> guessing<span class="op">.</span>trim())<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. If we want to find a string in a list of string on heap</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">// let _existing_guessing = test_args.contains(&amp;guessing.trim().to_string());</span></span></code></pre></div>
+<p>Lets check the code here</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">#![</span>allow<span class="at">(</span><span class="pp">clippy::</span>op_ref<span class="at">)]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">std::cmp::</span>Ordering<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">std::</span>io<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//let test_args = vec![&quot;quit&quot;.to_string(), &quot;q&quot;.to_string(), &quot;Q&quot;.to_string()];</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> test_args<span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">3</span>] <span class="op">=</span> [<span class="st">&quot;quit&quot;</span><span class="op">,</span> <span class="st">&quot;Quit&quot;</span><span class="op">,</span> <span class="st">&quot;q&quot;</span>]<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> test_args<span class="op">.</span>iter() <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;item =&gt; {}&quot;</span><span class="op">,</span> item)<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> x <span class="op">=</span> <span class="st">&quot;q&quot;</span><span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> y <span class="op">=</span> test_args<span class="op">.</span>iter()<span class="op">.</span>any(<span class="op">|</span>v<span class="op">|</span> v <span class="op">==</span> <span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;Yes we have found {}&quot;</span><span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> secret_num <span class="op">=</span> <span class="pp">rand::</span>thread_rng()<span class="op">.</span>gen_range(<span class="dv">1</span><span class="op">..=</span><span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;the secret number is =&gt; {secret_num}&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;Guessing Game for current object ... &quot;</span>)<span class="op">;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> _do_you_want_to_continue<span class="op">:</span> <span class="dt">bool</span> <span class="op">=</span> <span class="cn">true</span><span class="op">;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// You cannot get this one here, as it needed every trial in while .. &lt;-</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">//let mut guessing = String::new();</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> guessing <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> _do_you_want_to_continue <span class="op">{</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;Please input your favorate number (guessing) &quot;</span>)<span class="op">;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">// this will clear our String on the heap and make it &quot;&quot;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        guessing<span class="op">.</span>clear()<span class="op">;</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="pp">io::</span>stdin()</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guessing)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>expect(<span class="st">&quot;Error, expecting a user input&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;You have input {}&quot;</span><span class="op">,</span> <span class="op">&amp;</span>guessing)<span class="op">;</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="co">// if guessing.trim() == &quot;q&quot; {</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="co">//     _do_you_want_to_continue = false;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="co">// }</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="co">//let exiting_guessing = test_args.iter().any(|v| v == guessing.trim());</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> exiting_guessing <span class="op">=</span> test_args<span class="op">.</span>iter()<span class="op">.</span>any(<span class="op">|</span>v<span class="op">|</span> v <span class="op">==</span> <span class="op">&amp;</span>guessing<span class="op">.</span>trim())<span class="op">;</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="co">// you can also use ...</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="co">// let _existing_guessing = test_args.contains(&amp;guessing.trim().to_string());</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> _existing_guessing <span class="op">=</span> test_args<span class="op">.</span>contains(<span class="op">&amp;</span>guessing<span class="op">.</span>trim())<span class="op">;</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;The contains function doesnt accept trim, as it is required a String while trim produces a &amp;str, currently the value is {}&quot;</span><span class="op">,</span> _existing_guessing)<span class="op">;</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> exiting_guessing <span class="op">{</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            <span class="pp">println!</span>(</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;We will exit the program now, sinc eyou selelcted [{}]... &quot;</span><span class="op">,</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                <span class="op">&amp;</span>guessing<span class="op">.</span>trim()</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>            )<span class="op">;</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>            _do_you_want_to_continue <span class="op">=</span> <span class="cn">false</span><span class="op">;</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        <span class="co">//let guessing: u32 = guessing.trim().parse().expect(&quot;Please type a number!&quot;);</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> guessing<span class="op">:</span> <span class="dt">u32</span> <span class="op">=</span> <span class="cf">match</span> guessing<span class="op">.</span>trim()<span class="op">.</span>parse() <span class="op">{</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            <span class="cn">Ok</span>(num) <span class="op">=&gt;</span> num<span class="op">,</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            <span class="cn">Err</span>(_) <span class="op">=&gt;</span> <span class="cf">continue</span><span class="op">,</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;**************************************************&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">match</span> guessing<span class="op">.</span>cmp(<span class="op">&amp;</span>secret_num) <span class="op">{</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="pp">Ordering::</span>Less <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">&quot;Too small!&quot;</span>)<span class="op">,</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            <span class="pp">Ordering::</span>Greater <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">&quot;Too big!&quot;</span>)<span class="op">,</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            <span class="co">//Ordering::Equal =&gt; println!(&quot;You win!&quot;),</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            <span class="pp">Ordering::</span>Equal <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                <span class="pp">println!</span>(<span class="st">&quot;You win! &quot;</span>)<span class="op">;</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">&quot;**************************************************&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="concepts">Concepts</h2>
+<ol type="1">
+<li>Some()</li>
+<li>panic()</li>
+<li>wrap()</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// `unwrap` returns a `panic` when it receives a `None`.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">//Example</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="st">&quot;32&quot;</span><span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div>
+<ol start="4" type="1">
+<li>casting</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> another_temp_var <span class="op">=</span> guessing<span class="op">.</span>trim()<span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// or</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> another_temp_var<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> guessing<span class="op">.</span>trim()<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div>
+<h2 id="getting-help-and-documentation">Getting help and
+documentation</h2>
+<p>using</p>
+<pre class="shell"><code>cargo doc --open</code></pre>
+<ul>
+<li><a
+href="https://programming-idioms.org/idiom/12/check-if-list-contains-a-value/414/rust">Programming
+idiom - syntax</a></li>
+<li><a
+href="https://www.hackertouch.com/how-to-create-and-check-string-is-empty-rust.html">Types
+of new string</a></li>
+<li><a href="http://danielnill.com">Accepting user input, remove
+trim</a></li>
+<li><a
+href="https://stackoverflow.com/questions/24158114/what-are-the-differences-between-rusts-string-and-str">Compare
+between string literal &amp;str vs String on heap</a></li>
+</ul>
+
+</body>
+</html>

@@ -168,13 +168,11 @@ fn type_of<T>(_:T) -> & 'static str {
 - Using `+` to concat two strings, in the form
 
 ```rust
-
-    let s1 = String::from("Hello, ");
-    let s2 = String::from("world!");
-    println!("We have {} and {}", s1, s2);
-    let s3 =  s1 + &s2;
-    print!("now both have been concatented into -> [{}]", s3);
-
+let s1 = String::from("Hello, ");
+let s2 = String::from("world!");
+println!("We have {} and {}", s1, s2);
+let s3 =  s1 + &s2;
+print!("now both have been concatented into -> [{}]", s3);
 
 ```
 

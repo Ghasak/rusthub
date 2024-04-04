@@ -1,6 +1,7 @@
 # Rust Fundamental programming
 
 ## String types
+
 There are two types of strings in `Rust` and you can initialize the string on
 `stack` or `heap`. The most important part, is that you have to compare two
 strings should be same to produce the results you want.
@@ -12,14 +13,15 @@ strings should be same to produce the results you want.
   while `String` (`new`) keyword means its on `heap`.
 
 ## Controlling memeory for variables
+
 You can use `shadowing` which will allow you to keep same memory for a given
 variable without a need to create new variable. This is useful when you want to
 converate the same variable from one given type to another.
 
-
 ## Shadowing
-One of the aspect, when using `loop` or `while`, is that if the `String` is keep on chaning, then you can shadow it at every iteration using
 
+One of the aspect, when using `loop` or `while`, is that if the `String` is keep
+on chaning, then you can shadow it at every iteration using
 
 ```rust
 while some_value_bool {
@@ -30,7 +32,7 @@ while some_value_bool {
 
 ## Empty String
 
-```Rust
+```rust
 fn main() {
     let s1 = String::new();
     let s2 = String::from("");
@@ -46,14 +48,14 @@ fn main() {
 }
 ```
 
-
 ## Array and Vector in Rust
+
 - `array` is what we call it a list, but must be all elements in same type.
   `array` is constructed on `stack` and must known the size.
 - `Vector` is another list, but on `heap` the size can be different, all
   elements must be same data type.
 
-```Rust
+```rust
 // Assumption
 // guessing is String on heap created using String::new(); hold some string.
 
@@ -77,8 +79,8 @@ let exiting_guessing = test_args.iter().any(|v| v == guessing.trim());
 // let _existing_guessing = test_args.contains(&guessing.trim().to_string());
 
 ```
-Lets check the code here
 
+Lets check the code here
 
 ```rust
 #![allow(clippy::op_ref)]
@@ -153,16 +155,21 @@ fn main() {
 }
 
 ```
+
 ## Concepts
+
 1.  Some()
 2.  panic()
 3.  wrap()
-```Rust
+
+```rust
 // `unwrap` returns a `panic` when it receives a `None`.
 //Example
 let x = "32".parse::<i32>().unwrap();
 ```
+
 4. casting
+
 ```rust
 let another_temp_var = guessing.trim().parse::<i32>().unwrap();
 // or
@@ -170,14 +177,13 @@ let another_temp_var: i32 = guessing.trim().parse().unwrap();
 
 ```
 
-
-
 ## Getting help and documentation
+
 using
+
 ```shell
 cargo doc --open
 ```
-
 
 - [Programming idiom - syntax](https://programming-idioms.org/idiom/12/check-if-list-contains-a-value/414/rust)
 - [Types of new string](https://www.hackertouch.com/how-to-create-and-check-string-is-empty-rust.html)

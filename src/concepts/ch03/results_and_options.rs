@@ -81,14 +81,12 @@ impl MyInfo {
     }
 }
 
-
 pub fn testing_my_info(my_info: MyInfo) -> Option<String> {
     let output_message =
-        format!("Output of the current function is not Null -> Awesome Perforamnce ... ");
-    if my_info.user_status == true {
+        String::from("Output of the current function is not Null -> Awesome Perforamnce ... ");
+    if my_info.user_status {
         Some(output_message)
-} else {
+    } else {
         None
     }
-
 }

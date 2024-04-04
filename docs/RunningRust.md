@@ -4,13 +4,13 @@
 
 There are several ways to compile your programm.
 
-```shell
+```sh
 cargo run --quiet
 ```
 
 or
 
-```shell
+```sh
 rustc src/main.rs && /target/debug/<binary_name>
 # example
 rustc src/main.rs && target/debug/rust_cli
@@ -18,7 +18,7 @@ rustc src/main.rs && target/debug/rust_cli
 rustc  src/main.rs  -o target/debug/output && target/debug/output
 ```
 
-```shell
+```sh
 cargo build --quiet && ./target/debug/<binary_name>
 ```
 
