@@ -25,6 +25,7 @@ use concepts::ch03::{
     rust_ownership_and_borrowing, structs_traits_and_implementation,
 };
 
+use concepts::ch03::compare_with_cpp::*;
 use concepts::ch03::understanding_traits_concept::testing_trait_fundamental_concept;
 
 use concepts::create_text;
@@ -122,8 +123,9 @@ fn main() {
         println!("{i:#?} -> {output:#?}")
     }
 
-    let my_string = String::from("This just a test for my current string .... ");
-    println!("my current string is -> {my_string:#?}");
-    println!("Trait Concept in depth ..");
-    testing_trait_fundamental_concept();
+    // let my_string = String::from("This just a test for my current string .... ");
+    // println!("my current string is -> {my_string:#?}");
+    // println!("Trait Concept in depth ..");
+    // testing_trait_fundamental_concept();
+    allocate_on_heap();
 }
