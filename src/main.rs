@@ -123,9 +123,9 @@ fn main() {
         println!("{i:#?} -> {output:#?}")
     }
 
-    // let my_string = String::from("This just a test for my current string .... ");
-    // println!("my current string is -> {my_string:#?}");
-    // println!("Trait Concept in depth ..");
-    // testing_trait_fundamental_concept();
+    let my_string = String::from("This just a test for my current string .... ");
+    println!("my current string is -> {my_string:#?}");
+    println!("Trait Concept in depth ..");
+    testing_trait_fundamental_concept();
     allocate_on_heap();
 }

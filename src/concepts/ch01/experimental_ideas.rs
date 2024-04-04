@@ -54,7 +54,8 @@ pub fn over_write_console_output() {
     println!();
 }
 
-use crossterm::{cursor, style::Stylize, terminal, ExecutableCommand, Result};
+use crate::io::Result;
+use crossterm::{cursor, style::Stylize, terminal, ExecutableCommand};
 //use std::io::{stdout, Write};
 pub fn over_write_console_output_enhanced() -> Result<()> {
     let mut stdout = stdout(); // lock stdout and use the same locked instance throughout

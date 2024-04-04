@@ -1,23 +1,22 @@
 # Understanding Rust Traits
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-
 **Table of Contents**
 
 - [Understanding Rust Traits](#understanding-rust-traits)
-  - [Introduction](#introduction)
-    - [1. What is a Trait?](#1-what-is-a-trait)
-    - [2. Purpose of Traits:](#2-purpose-of-traits)
-    - [3. Using Traits:](#3-using-traits)
-    - [4. Deriving Traits:](#4-deriving-traits)
-    - [5. Custom Designed Trait:](#5-custom-designed-trait)
-    - [6. Example: `Describable` Trait:](#6-example-describable-trait)
-  - [Example](#example)
-  - [Custom Trait - Defines a custom trait `Describable`](#custom-trait---defines-a-custom-trait-describable)
-  - [Default Trait From Standard Library](#default-trait-from-standard-library)
-  - [Custom Derived Trait](#custom-derived-trait)
-    - [Q&E Session](#qe-session)
-      - [Q1 About the derive keyword](#q1-about-the-derive-keyword)
+    - [Introduction](#introduction)
+        - [1. What is a Trait?](#1-what-is-a-trait)
+        - [2. Purpose of Traits:](#2-purpose-of-traits)
+        - [3. Using Traits:](#3-using-traits)
+        - [4. Deriving Traits:](#4-deriving-traits)
+        - [5. Custom Designed Trait:](#5-custom-designed-trait)
+        - [6. Example: `Describable` Trait:](#6-example-describable-trait)
+    - [Example](#example)
+    - [Custom Trait - Defines a custom trait `Describable`](#custom-trait---defines-a-custom-trait-describable)
+    - [Default Trait From Standard Library](#default-trait-from-standard-library)
+    - [Custom Derived Trait](#custom-derived-trait)
+        - [Q&E Session](#qe-session)
+            - [Q1 About the derive keyword](#q1-about-the-derive-keyword)
 
 <!-- markdown-toc end -->
 
@@ -38,7 +37,7 @@ A trait in Rust is a language feature that defines a set of behaviors or
 functionalities that a type can implement. It allows you to define shared
 behavior in an abstract way, independent of the specific data type.
 
-### 2. Purpose of Traits:
+### 2. Purpose of Traits
 
 - **Encapsulation of Functionality**: Traits encapsulate functionality and
   features, providing a way to define common behavior that can be shared among
@@ -48,7 +47,7 @@ behavior in an abstract way, independent of the specific data type.
 - **Polymorphism**: Traits enable polymorphism in Rust, allowing different
   types to exhibit similar behavior through trait implementations.
 
-### 3. Using Traits:
+### 3. Using Traits
 
 - **Defining a Trait**: Traits are defined using the `trait` keyword followed
   by the trait name and a set of method signatures. These methods define the
@@ -58,14 +57,14 @@ behavior in an abstract way, independent of the specific data type.
   implementations for the methods defined in the trait. This is done using the
   `impl` keyword followed by the trait name and the method implementations.
 
-### 4. Deriving Traits:
+### 4. Deriving Traits
 
 - The `derive` attribute in Rust allows automatic generation of trait
   implementations for certain traits, such as `Debug`, `Clone`, `Copy`, etc.
   However, it doesn't work for custom traits. For custom traits, you need to
   manually implement them for your types.
 
-### 5. Custom Designed Trait:
+### 5. Custom Designed Trait
 
 - In Rust, you can create your own custom traits tailored to your specific
   needs. These traits can define behavior that is relevant to your application
@@ -75,7 +74,7 @@ behavior in an abstract way, independent of the specific data type.
   functionality to that type, allowing it to exhibit the behavior defined by the
   trait.
 
-### 6. Example: `Describable` Trait:
+### 6. Example: `Describable` Trait
 
 - In your example, you have defined a custom trait called `Describable` with a
   method `describe()`. This trait encapsulates the behavior of describing an
@@ -134,17 +133,15 @@ pub fn testing_trait_fundamental_concept() {
     // Calling the describe method from the trait
     book.describe();
 }
-
-
 ```
 
-## Custom Trait - Defines a custom trait `Describable`
+## Custom Trait Defines a custom trait `Describable`
 
 ```rust
 use std::fmt;
 
-/// Define a custom trait `Describable`.
-/// This trait provides a method `describe()` which prints information about the object.
+ Define a custom trait `Describable`.
+ This trait provides a method `describe()` which prints information about the object.
 pub trait Describable {
     fn describe(&self);
 }
