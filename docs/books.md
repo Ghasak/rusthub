@@ -1,5 +1,7 @@
 # Elecontric Books help with Rust
 
+The following is a collection of my current books that I found online about `Rust`, covers all the related topics.
+
 ## List of Books
 
 - [Many Resourcesful books](https://github.com/sger/RustBooks)
@@ -24,8 +26,10 @@
 - [effective-rust](https://www.lurklurk.org/effective-rust/print.html)
 
 ## Must Read
+
 - [project about rocket written in Rust](https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)
 - [Rust cheatsheet](https://zerotomastery.io/cheatsheets/rust-cheat-sheet/)
 
 ## Game Egnine
+
 - [Bevy Game Engine Tutorial](https://github.com/naodroid/bevy_game_tutorial)

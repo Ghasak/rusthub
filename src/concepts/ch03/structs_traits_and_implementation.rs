@@ -1,3 +1,5 @@
+use std::io::Result;
+
 use rand::Rng;
 
 #[derive(Debug)]

@@ -1,7 +1,5 @@
 // use std::io ;
-// use std::io::stdin;
-#![allow(clippy::assign_op_pattern)]
-#![allow(unused_imports)]
+// use std::io::stdin; #![allow(clippy::assign_op_pattern)] #![allow(unused_imports)]
 #![allow(dead_code)]
 #![allow(non_camel_case_types)]
 #![allow(unused_variables)]
@@ -26,7 +24,6 @@ use concepts::ch03::{
 };
 
 use concepts::ch03::compare_with_cpp::*;
-use concepts::ch03::understanding_traits_concept::testing_trait_fundamental_concept;
 
 use concepts::create_text;
 use concepts::easy_rust::{
@@ -116,6 +113,24 @@ fn main() {
     }
     println!("{result:#?}");
 
+    let my_string = String::from("This just a test for my current string .... ");
+    println!("my current string is -> {my_string:#?}");
+    println!("Trait Concept in depth ..");
+
+    let logging_level: String = "ERROR".to_string();
+    let varx: i32 = 10;
+    println!(
+        "[{}] Value of i -> {}",
+        logging_level.yellow(),
+        varx.to_string().red()
+    );
+    allocate_on_heap();
+    let v = vec![1, 2, 3, 4, 5];
+    let output = testing_function(&v);
+    println!("The output is -> {:#?}", output);
+    let v2 = vec![121.23, 433.53, 232.23, 1212.23];
+    let o2 = my_function(&v2);
+
     let mut output = String::new();
     for i in 0..15 {
         let temp = format!("{}", i);
@@ -123,9 +138,77 @@ fn main() {
         println!("{i:#?} -> {output:#?}")
     }
 
-    let my_string = String::from("This just a test for my current string .... ");
-    println!("my current string is -> {my_string:#?}");
-    println!("Trait Concept in depth ..");
-    testing_trait_fundamental_concept();
-    allocate_on_heap();
+    let arg1 = "Ok".to_string();
+    let arg2: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0];
+    checking_perforamnce(&arg1, &arg2);
+
+    let arg1 = String::from("INFO").yellow();
+    let my_vector = vec![12.,322.,43.,1233.,122222.123];
+    for item in my_vector{
+        println!("[  {}  ] Item is  ... : {}", arg1, item);
+    }
+
+
+
+
+
+
+}
+
+pub fn testing_function(my_vec: &Vec<i32>) -> Result<i32, String> {
+    if my_vec.is_empty() {
+        println!("The vector is empty -> ");
+        Ok(0)
+    } else {
+        let my_string = String::from("Woww");
+        Err(my_string)
+    }
+}
+
+pub fn my_function(my_vector: &Vec<f32>) -> Option<String> {
+    for i in my_vector {
+        println!("The value of i -> {}", i);
+    }
+    let my_string = String::from("OK");
+    Some(my_string)
+}
+
+pub fn my_current_file(my_vector: &[f32]) -> Result<f32, String> {
+    if 1 > 2 {
+        Ok(32.2)
+    } else {
+        Err("Wow".to_string())
+    }
+}
+
+pub fn my_fucntion(my_vector: &str, my_another_vector: &[f32]) -> Option<String> {
+    Some("This is just a testing".to_owned())
+}
+
+pub fn my_function_testing(
+    string_param1: &String,
+    vector_param2: &Vec<f32>,
+) -> Result<String, String> {
+    let mut idx: i32 = 0;
+    if string_param1 == &"Ok".to_string() || string_param1.is_empty() {
+        Ok("Yes the string is either OK or empty".to_owned())
+    } else {
+        for item in vector_param2 {
+            idx = idx + 1;
+            println!("The Item: {} is ->{}", idx, item)
+        }
+        Ok("The results are very much amazing...".to_owned())
+    }
+}
+
+pub fn checking_perforamnce(param1: &str, param2: &Vec<f32>) -> Option<String> {
+    if param1 == "OK" {
+        Some("WOW".to_string())
+    } else {
+        let information_level = "INFO".to_string().green();
+        for var in param2 {
+            println!("[  {}  ] The value of i -> {}", information_level, var);
+        }
+        Some("Not Wow".to_string())
+    }
 }
